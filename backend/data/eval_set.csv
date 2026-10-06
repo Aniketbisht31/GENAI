@@ -1,0 +1,61 @@
+text,image_path,building,expected_intent,expected_group,expected_subcategory,expected_safety_critical,expected_campus_related
+Water leaking from a pipe in the hostel corridor,,Hostel Block 1,hazard,Hostel Services,Plumbing,0,1
+Water is dripping through the library ceiling,,Main Library,hazard,Civil & Plumbing Services,Leakage Repairs,0,1
+Sink pipe burst and flooded the hostel washroom,,Hostel Block 2,hazard,Hostel Services,Plumbing,0,1
+Water pooling under the laboratory sink,,Science Block,hazard,Civil & Plumbing Services,Plumbing,0,1
+Toilet flush valve is broken in the hostel,,Hostel Block 1,hazard,Hostel Services,Plumbing,0,1
+Blocked drain is backing up in the admin washroom,,Admin Building,hazard,Civil & Plumbing Services,Drainage,0,1
+A live wire is exposed and sparking near the classroom door,,Engineering Block B,hazard,Electrical Services,Wiring / Cabling,1,1
+The hostel room switchboard has a loose electrical wire,,Hostel Block 2,hazard,Hostel Services,Electrical,0,1
+Electrical panel is buzzing and smells burnt in the lab,,Science Block,hazard,Electrical Services,Electrical Panels,1,1
+Power is out across the academic block,,Engineering Block A,hazard,Electrical Services,Power Supply,0,1
+A light bulb is flickering in the library reading room,,Main Library,hazard,Electrical Services,Lighting,0,1
+Generator is leaking fuel beside the electrical room,,Admin Building,hazard,Electrical Services,Generators,1,1
+UPS battery is swollen and hot in the server room,,Engineering Block A,hazard,Electrical Services,UPS,1,1
+A student received a shock from the exposed wire in the lab,,Science Block,hazard,Electrical Services,Wiring / Cabling,1,1
+The hostel hallway has overflowing trash and smells bad,,Hostel Block 1,hazard,Hostel Services,Housekeeping,0,1
+Washroom floor is dirty and slippery in the hostel,,Hostel Block 2,hazard,Hostel Services,Housekeeping,0,1
+Classroom has not been cleaned after yesterday's lecture,,Engineering Block B,hazard,Housekeeping Services,Classrooms,0,1
+Laboratory waste bin is overflowing,,Science Block,hazard,Housekeeping Services,Waste Collection,0,1
+Spilled oil has made the corridor floor slippery,,Engineering Block A,hazard,Housekeeping Services,Common Areas,0,1
+Broken glass is scattered in the admin lobby,,Admin Building,hazard,Housekeeping Services,Administrative Buildings,0,1
+Cockroaches are coming out of the hostel kitchen drain,,Hostel Block 1,hazard,Hostel Services,Pest Control,0,1
+Termites are damaging desks in the library,,Main Library,hazard,Landscaping & Campus Maintenance,Pest Control,0,1
+Mosquitoes are breeding in standing water near the sports ground,,Sports Complex,hazard,Landscaping & Campus Maintenance,Pest Control,0,1
+Rats were seen in the laboratory storage room,,Science Block,hazard,Hostel Services,Pest Control,0,1
+The classroom air conditioner is not cooling,,Engineering Block B,hazard,HVAC / AC Services,AC Repair,0,1
+Air conditioning is leaking water in the hostel bedroom,,Hostel Block 2,hazard,Hostel Services,AC / HVAC,0,1
+Ventilation fan has stopped in the chemistry lab,,Science Block,hazard,HVAC / AC Services,Ventilation,0,1
+The library HVAC is blowing hot air,,Main Library,hazard,HVAC / AC Services,Temperature Control,0,1
+Duct is rattling loudly above the admin office,,Admin Building,hazard,HVAC / AC Services,Duct Maintenance,0,1
+Smoke is coming from a fire alarm panel,,Engineering Block A,hazard,Fire & Safety Services,Fire Alarm Systems,1,1
+Fire extinguisher is missing from the hostel corridor,,Hostel Block 1,hazard,Fire & Safety Services,Fire Extinguishers,0,1
+Exit door is jammed and cannot open,,Admin Building,hazard,Fire & Safety Services,Emergency Exits,1,1
+A sprinkler head is broken and spraying water in the lab,,Science Block,hazard,Fire & Safety Services,Sprinkler Systems,0,1
+Unidentified person is trying hostel room doors at night,,Hostel Block 2,hazard,Security Services,Hostel Security,1,1
+CCTV camera at the main gate is not recording,,Admin Building,hazard,Security Services,CCTV Monitoring,0,1
+A visitor entered the academic block without checking in,,Engineering Block A,hazard,Security Services,Visitor Management,0,1
+A car is blocking the fire lane in the parking lot,,Parking Lot,hazard,Transport & Parking,Traffic Management,1,1
+Please tell me how to apply for a campus scholarship,,Admin Building,service_request,Student / Administrative Services,Scholarships,0,1
+I need a replacement student ID card,,Admin Building,service_request,Student / Administrative Services,ID Cards,0,1
+My exam results have not appeared in the student portal,,Admin Building,service_request,Student / Administrative Services,Examination,0,1
+I want to submit a grievance about a registration issue,,Admin Building,service_request,Student / Administrative Services,Grievances,0,1
+Can I borrow a book from the library for another week,,Main Library,service_request,Library Services,Book Services,0,1
+My library book return is not showing in my account,,Main Library,service_request,Library Services,Book Issue / Return,0,1
+Please install the design software on a lab computer,,Engineering Block A,service_request,IT & Telecom Services,Computer / Hardware Support,0,1
+The campus Wi-Fi password reset page is not working,,Main Library,service_request,IT & Telecom Services,Campus Wi-Fi,0,1
+I need a copy of my fee payment receipt,,Admin Building,service_request,Student / Administrative Services,Accounts / Finance,0,1
+Please add a stop to the evening campus bus route,,Parking Lot,service_request,Transport Services,Bus Route Management,0,1
+Can I book laundry pickup from my hostel room,,Hostel Block 1,service_request,Laundry Services,Hostel Laundry,0,1
+Please arrange catering for a student club event,,Sports Complex,service_request,Mess / Food Services,Catering / Events,0,1
+We need extra chairs in the seminar hall for a talk,,Admin Building,service_request,Events & Campus Facilities,Furniture Arrangement,0,1
+Please order replacement stationery for the department,,Admin Building,service_request,Procurement / Stores,Stationery,0,1
+The laboratory eyewash station is broken,,Science Block,hazard,Laboratories & Technical Facilities,Safety Equipment,1,1
+The auditorium stage lighting has exposed wiring,,Sports Complex,hazard,Events & Campus Facilities,Electrical / Lighting Support,1,1
+A tree branch has fallen across the campus walkway,,Parking Lot,hazard,Landscaping & Campus Maintenance,Tree Maintenance,0,1
+Chemical waste container is leaking in the science lab,,Science Block,hazard,Waste Management,Biomedical / Laboratory Waste,1,1
+Someone left a backpack unattended by the main entrance,,Admin Building,hazard,Security Services,Emergency Response,1,1
+My lunch was cold at the canteen today,,Canteen,service_request,Mess / Food Services,Hostel Mess,0,1
+A student has collapsed and needs an ambulance immediately,,Medical Centre,hazard,Medical / Health Services,Emergency Medical Support,1,1
+Here is a selfie from my weekend,,Main Library,service_request,,,0,0
+A photo of my cat with no campus issue,,Hostel Block 1,service_request,,,0,0
