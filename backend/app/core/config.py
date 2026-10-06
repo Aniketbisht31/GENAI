@@ -4,6 +4,8 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     gemini_api_key: str = ""
+    gemini_model: str = "gemini-3.8-flash"
+    embedding_model: str = "gemini-embedding-2"
     jwt_secret: str = "change-me-in-production"
     database_url: str = "sqlite:///./sos.db"
     upload_dir: str = "uploads"

@@ -7,10 +7,11 @@ from sqlalchemy.orm import Session
 
 from app.models import Report, User, UserRole, ReportStatus, StatusLog
 from app.services.notifier import notify_assigned
+from app.services.catalog_classifier import load_catalog
 
 logger = logging.getLogger(__name__)
 
-CATEGORY_DEPARTMENT = {
+LEGACY_CATEGORY_DEPARTMENT = {
     "electrical": "Electrical",
     "civil": "Civil",
     "security": "Security",
@@ -23,8 +24,11 @@ def route_report(report: Report, db: Session) -> None:
     Auto-assign a report to the least-loaded authority in the appropriate department.
     Sets status to 'assigned' and writes a StatusLog entry.
     """
-    category = (report.category.value if report.category else "other")
-    department = CATEGORY_DEPARTMENT.get(category, "Admin")
+    catalog_entry = next(
+        (entry for entry in load_catalog() if entry["id"] == report.catalog_id), None
+    ) if report.catalog_id else None
+    category = getattr(report.category, "value", report.category or "other")
+    department = catalog_entry["owner_department"] if catalog_entry else LEGACY_CATEGORY_DEPARTMENT.get(category, "Admin")
     report.assigned_department = department
 
     # Find least-loaded authority in this department

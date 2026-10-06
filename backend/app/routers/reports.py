@@ -1,4 +1,6 @@
 import os
+import json
+import asyncio
 import shutil
 import uuid
 from datetime import datetime, date, timedelta
@@ -14,10 +16,11 @@ from app.database import get_db
 from app.models import Report, User, Hype, StatusLog, UserRole, ReportStatus, Verification, Location
 from app.schemas import (
     ReportOut, ReportListItem, PaginatedReports, StatusUpdate,
-    AssignUpdate, HypeOut, StatusLogOut, PriorityBreakdown, VerificationOut
+    AssignUpdate, HypeOut, StatusLogOut, PriorityBreakdown, VerificationOut,
+    CatalogChoice,
 )
 from app.routers.auth import get_current_user, require_role
-from app.services.ai_classifier import classify_report
+from app.services.catalog_classifier import classify_catalog_report, load_catalog, map_to_legacy_fields
 from app.services.duplicate_detector import find_similar, compute_and_store_embedding
 from app.services.priority_engine import compute_priority, update_priority
 from app.services.router import route_report
@@ -96,6 +99,17 @@ def _build_report_out(report: Report, current_user: User, db: Session) -> Report
         ai_summary=report.ai_summary,
         ai_reasoning=report.ai_reasoning,
         ai_confidence=report.ai_confidence,
+        intent=report.intent or "hazard",
+        is_campus_related=report.is_campus_related,
+        service_group=report.service_group,
+        service_subcategory=report.service_subcategory,
+        catalog_id=report.catalog_id,
+        intent_confidence=report.intent_confidence,
+        group_confidence=report.group_confidence,
+        subcategory_confidence=report.subcategory_confidence,
+        prompt_version=report.prompt_version,
+        confirmation_candidates=json.loads(report.confirmation_candidates or "[]"),
+        sla_hours=report.sla_hours,
         status=report.status,
         assigned_department=report.assigned_department,
         priority_score=report.priority_score,
@@ -150,11 +164,27 @@ async def create_report(
     db.refresh(report)
 
     # AI classification
-    ai_result = await classify_report(image_path, description or title)
-    report.hazard_type = ai_result.get("hazard_type")
-    report.category = ai_result.get("category")
+    location = db.query(Location).filter(Location.building == building).first()
+    ai_result = await classify_catalog_report(
+        image_path, description or title, building, zone or "",
+        location.building_type if location else "campus_wide",
+    )
+    legacy_fields = map_to_legacy_fields(ai_result)
+    report.hazard_type = legacy_fields["hazard_type"]
+    report.category = legacy_fields["category"]
     report.severity = ai_result.get("severity")
     report.is_safety_critical = ai_result.get("is_safety_critical", False)
+    report.intent = ai_result.get("intent", "hazard")
+    report.is_campus_related = ai_result.get("is_campus_related", True)
+    report.service_group = ai_result.get("service_group")
+    report.service_subcategory = ai_result.get("service_subcategory")
+    report.catalog_id = ai_result.get("catalog_id")
+    report.intent_confidence = ai_result.get("intent_confidence")
+    report.group_confidence = ai_result.get("group_confidence")
+    report.subcategory_confidence = ai_result.get("subcategory_confidence")
+    report.prompt_version = ai_result.get("prompt_version")
+    report.confirmation_candidates = json.dumps(ai_result.get("candidates", []))
+    report.sla_hours = ai_result.get("sla_hours")
     report.ai_summary = ai_result.get("summary")
     report.ai_reasoning = ai_result.get("reasoning")
     report.ai_confidence = ai_result.get("confidence")
@@ -258,6 +288,10 @@ def list_reports(
             reporter_name=r.reporter.name if show_reporter else "Anonymous",
             current_user_hyped=hyped,
             image_path=r.image_path,
+            intent=r.intent or "hazard",
+            service_group=r.service_group,
+            service_subcategory=r.service_subcategory,
+            prompt_version=r.prompt_version,
         ))
 
     return PaginatedReports(
@@ -286,6 +320,8 @@ def my_reports(
             recurrence_count=r.recurrence_count, is_anonymous=r.is_anonymous,
             created_at=r.created_at, reporter_name=current_user.name,
             current_user_hyped=False, image_path=r.image_path,
+            intent=r.intent or "hazard", service_group=r.service_group,
+            service_subcategory=r.service_subcategory, prompt_version=r.prompt_version,
         )
         for r in reports
     ]
@@ -300,6 +336,54 @@ def get_report(
     report = db.query(Report).filter(Report.id == report_id).first()
     if not report:
         raise HTTPException(404, "Report not found")
+    return _build_report_out(report, current_user, db)
+
+
+@router.patch("/{report_id}/classification", response_model=ReportOut)
+def confirm_classification(
+    report_id: int,
+    data: CatalogChoice,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Let the reporter confirm one of the classifier's suggested catalog entries."""
+    report = db.query(Report).filter(Report.id == report_id).first()
+    if not report:
+        raise HTTPException(404, "Report not found")
+    if report.reporter_id != current_user.id and current_user.role != UserRole.admin:
+        raise HTTPException(403, "Only the reporter can confirm this classification")
+    candidate = next((entry for entry in load_catalog() if entry["id"] == data.catalog_id), None)
+    if not candidate:
+        raise HTTPException(404, "Catalog entry not found")
+    allowed_ids = {item.get("id") for item in json.loads(report.confirmation_candidates or "[]")}
+    if data.catalog_id not in allowed_ids:
+        raise HTTPException(400, "Choose one of the suggested classifications")
+
+    report.catalog_id = candidate["id"]
+    report.service_group = candidate["group"]
+    report.service_subcategory = candidate["subcategory"]
+    report.intent = candidate["intent"]
+    report.sla_hours = candidate["sla_hours"]
+    report.assigned_department = candidate["owner_department"]
+    if report.intent == "service_request":
+        report.severity = None
+        report.is_safety_critical = False
+    else:
+        report.severity = candidate.get("default_severity") or report.severity or 3
+    legacy_fields = map_to_legacy_fields({
+        "is_campus_related": True,
+        "intent": report.intent,
+        "service_group": report.service_group,
+        "service_subcategory": report.service_subcategory,
+    })
+    report.category = legacy_fields["category"]
+    report.hazard_type = legacy_fields["hazard_type"]
+    report.confirmation_candidates = "[]"
+    report.ai_reasoning = (report.ai_reasoning or "") + " Classification confirmed by reporter."
+    db.commit()
+    update_priority(report, db)
+    route_report(report, db)
+    db.refresh(report)
     return _build_report_out(report, current_user, db)
 
 
@@ -427,7 +511,7 @@ def remove_hype(
 async def resolve_report(
     report_id: int,
     note: str = Form(...),
-    after_image: UploadFile = File(...),
+    after_image: Optional[UploadFile] = File(None),
     current_user: User = Depends(require_role(UserRole.authority, UserRole.admin)),
     db: Session = Depends(get_db),
 ):
@@ -436,25 +520,61 @@ async def resolve_report(
     if not report:
         raise HTTPException(404, "Report not found")
 
+    old_status = report.status.value
+    if report.intent == "service_request":
+        report.status = ReportStatus.resolved
+        report.resolved_at = datetime.utcnow()
+        db.add(StatusLog(
+            report_id=report_id,
+            old_status=old_status,
+            new_status=ReportStatus.resolved.value,
+            changed_by=current_user.id,
+            note=note,
+        ))
+        db.commit()
+        notify_status_change(db, report, old_status, ReportStatus.resolved.value)
+        update_priority(report, db)
+        return {"message": "Service request completed without photo verification.", "ai_match": None, "flagged_for_review": False}
+
+    if not after_image:
+        raise HTTPException(400, "An after-photo is required for hazard verification")
+
     after_path = _save_upload(after_image)
 
     # AI verification
     ai_match = {"same_location": None, "issue_resolved": None, "confidence": None}
     if settings.gemini_api_key:
         try:
-            import google.generativeai as genai
+            from google import genai
+            from google.genai import types as genai_types
             from PIL import Image as PILImage
             import json as _json
 
-            genai.configure(api_key=settings.gemini_api_key)
-            model = genai.GenerativeModel("gemini-1.5-flash")
+            client = genai.Client(api_key=settings.gemini_api_key)
             parts = ["Compare these two campus images and return ONLY JSON: "
                      '{"same_location": true/false, "issue_resolved": true/false, "confidence": 0.0-1.0}']
             if report.image_path and os.path.exists(report.image_path):
                 parts.append(PILImage.open(report.image_path))
             parts.append(PILImage.open(after_path))
-            response = model.generate_content(parts)
-            raw = response.text
+            response = await asyncio.to_thread(
+                client.models.generate_content,
+                model=settings.gemini_model,
+                contents=parts,
+                config=genai_types.GenerateContentConfig(
+                    temperature=0,
+                    response_mime_type="application/json",
+                    response_schema={
+                        "type": "OBJECT",
+                        "properties": {
+                            "same_location": {"type": "BOOLEAN"},
+                            "issue_resolved": {"type": "BOOLEAN"},
+                            "confidence": {"type": "NUMBER"},
+                        },
+                        "required": ["same_location", "issue_resolved", "confidence"],
+                    },
+                ),
+            )
+            raw = response.text or ""
             import re
             m = re.search(r"\{.*\}", raw, re.DOTALL)
             if m:
@@ -547,12 +667,13 @@ def auto_resolve_stale(
     current_user: User = Depends(require_role(UserRole.admin)),
     db: Session = Depends(get_db),
 ):
-    """Auto-resolve pending_confirmation reports older than 72h."""
-    cutoff = datetime.utcnow() - timedelta(hours=72)
-    stale = db.query(Report).filter(
-        Report.status == ReportStatus.pending_confirmation,
-        Report.updated_at <= cutoff,
-    ).all()
+    """Auto-resolve reports unanswered beyond their catalog SLA (72h legacy default)."""
+    now = datetime.utcnow()
+    pending = db.query(Report).filter(Report.status == ReportStatus.pending_confirmation).all()
+    stale = [
+        report for report in pending
+        if report.updated_at <= now - timedelta(hours=report.sla_hours or 72)
+    ]
     count = 0
     for report in stale:
         report.status = ReportStatus.resolved
@@ -565,7 +686,7 @@ def auto_resolve_stale(
             old_status="pending_confirmation",
             new_status="resolved",
             changed_by=current_user.id,
-            note="Auto-resolved after 72h of no reporter response",
+            note=f"Auto-resolved after {report.sla_hours or 72}h SLA elapsed with no reporter response",
         )
         db.add(log)
         count += 1

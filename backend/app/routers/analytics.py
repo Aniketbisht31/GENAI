@@ -49,6 +49,11 @@ def analytics_summary(
         key = r.category.value if r.category else "unknown"
         by_category[key] = by_category.get(key, 0) + 1
 
+    by_service_group = {}
+    for r in all_reports:
+        key = r.service_group or "Unclassified"
+        by_service_group[key] = by_service_group.get(key, 0) + 1
+
     # Top buildings
     building_counts = {}
     for r in all_reports:
@@ -116,4 +121,5 @@ def analytics_summary(
         reports_per_day=reports_per_day,
         hype_leaderboard=hype_leaderboard,
         resolution_by_department=resolution_by_department,
+        by_service_group=by_service_group,
     )

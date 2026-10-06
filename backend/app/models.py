@@ -80,6 +80,17 @@ class Report(Base):
     ai_summary = Column(String(300), nullable=True)
     ai_reasoning = Column(Text, nullable=True)
     ai_confidence = Column(Float, nullable=True)
+    intent = Column(String(30), nullable=False, default="hazard")
+    is_campus_related = Column(Boolean, nullable=False, default=True)
+    service_group = Column(String(150), nullable=True)
+    service_subcategory = Column(String(150), nullable=True)
+    catalog_id = Column(String(200), nullable=True)
+    intent_confidence = Column(Float, nullable=True)
+    group_confidence = Column(Float, nullable=True)
+    subcategory_confidence = Column(Float, nullable=True)
+    prompt_version = Column(String(20), nullable=True)
+    confirmation_candidates = Column(Text, nullable=True)
+    sla_hours = Column(Integer, nullable=True)
 
     # Status & routing
     status = Column(SAEnum(ReportStatus), default=ReportStatus.reported)
@@ -179,3 +190,4 @@ class Location(Base):
     building = Column(String(100), nullable=False)
     zone = Column(String(100), nullable=True)
     criticality = Column(Integer, default=3)  # 1-5
+    building_type = Column(String(40), nullable=False, default="campus_wide")

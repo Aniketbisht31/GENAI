@@ -6,20 +6,16 @@ import json
 import re
 import os
 import logging
+import asyncio
 from typing import Optional
 from pydantic import BaseModel, validator
 
-import google.generativeai as genai
 from PIL import Image
 
 from app.core.config import get_settings
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
-
-# Configure Gemini
-genai.configure(api_key=settings.gemini_api_key)
-
 
 # ── Pydantic schema for AI output ─────────────────────────────────────────────
 
@@ -182,7 +178,9 @@ async def classify_report(image_path: Optional[str], text: str) -> dict:
         return _keyword_classify(text)
 
     try:
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        from google import genai
+        from google.genai import types
+        client = genai.Client(api_key=settings.gemini_api_key)
         parts = [SYSTEM_PROMPT]
 
         # Add image if provided
@@ -196,15 +194,26 @@ async def classify_report(image_path: Optional[str], text: str) -> dict:
         elif not image_path:
             return _keyword_classify("")
 
-        response = model.generate_content(parts)
-        raw = response.text
+        def generate(content):
+            return client.models.generate_content(
+                model=settings.gemini_model,
+                contents=content,
+                config=types.GenerateContentConfig(
+                    temperature=0,
+                    response_mime_type="application/json",
+                    response_schema=ClassificationResult,
+                ),
+            )
+
+        response = await asyncio.to_thread(generate, parts)
+        raw = response.text or ""
 
         data = _extract_json(raw)
         if data is None:
             # Retry once
             logger.warning("Malformed JSON from Gemini, retrying...")
-            response = model.generate_content(parts + ["\nReturn ONLY valid JSON, no other text."])
-            data = _extract_json(response.text)
+            response = await asyncio.to_thread(generate, parts + ["\nReturn ONLY valid JSON, no other text."])
+            data = _extract_json(response.text or "")
 
         if data is None:
             logger.error("Gemini returned non-JSON twice, falling back to keywords")

@@ -1,0 +1,3613 @@
+[
+  {
+    "id": "architect_services_new_facility_development",
+    "group": "Architect Services",
+    "subcategory": "New Facility Development",
+    "owner_department": "Civil",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "new facility development"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "architect_services_renovation_works",
+    "group": "Architect Services",
+    "subcategory": "Renovation Works",
+    "owner_department": "Civil",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "renovation works"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "facility_services_cctv_telecom",
+    "group": "Facility Services",
+    "subcategory": "CCTV & Telecom",
+    "owner_department": "IT",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "cctv",
+      "telecom",
+      "camera",
+      "surveillance"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "facility_services_civil_works",
+    "group": "Facility Services",
+    "subcategory": "Civil Works",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "civil works",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "facility_services_electrical_works",
+    "group": "Facility Services",
+    "subcategory": "Electrical Works",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "electrical works",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "facility_services_fire_safety",
+    "group": "Facility Services",
+    "subcategory": "Fire & Safety",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "fire",
+      "safety",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "facility_services_housekeeping",
+    "group": "Facility Services",
+    "subcategory": "Housekeeping",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "housekeeping",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "facility_services_hvac_air_conditioning",
+    "group": "Facility Services",
+    "subcategory": "HVAC / Air Conditioning",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "hvac",
+      "air conditioning",
+      "air conditioner",
+      "ac",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "facility_services_plumbing",
+    "group": "Facility Services",
+    "subcategory": "Plumbing",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "plumbing",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "facility_services_lift_escalator_maintenance",
+    "group": "Facility Services",
+    "subcategory": "Lift / Escalator Maintenance",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "lift",
+      "escalator maintenance",
+      "elevator",
+      "escalator"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "facility_services_general_maintenance",
+    "group": "Facility Services",
+    "subcategory": "General Maintenance",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "general maintenance"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hostel_services_civil",
+    "group": "Hostel Services",
+    "subcategory": "Civil",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "civil",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_electrical",
+    "group": "Hostel Services",
+    "subcategory": "Electrical",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "electrical",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_housekeeping",
+    "group": "Hostel Services",
+    "subcategory": "Housekeeping",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "housekeeping",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_laundry",
+    "group": "Hostel Services",
+    "subcategory": "Laundry",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "laundry",
+      "washing",
+      "clothes"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_mess_food_services",
+    "group": "Hostel Services",
+    "subcategory": "Mess / Food Services",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "mess",
+      "food services"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_security",
+    "group": "Hostel Services",
+    "subcategory": "Security",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_plumbing",
+    "group": "Hostel Services",
+    "subcategory": "Plumbing",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "plumbing",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_ac_hvac",
+    "group": "Hostel Services",
+    "subcategory": "AC / HVAC",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "ac",
+      "hvac",
+      "air conditioner",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_pest_control",
+    "group": "Hostel Services",
+    "subcategory": "Pest Control",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "pest control",
+      "rat",
+      "cockroach",
+      "mosquito",
+      "termite",
+      "pest"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "hostel_services_hostel_maintenance",
+    "group": "Hostel Services",
+    "subcategory": "Hostel Maintenance",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "hostel maintenance"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "transport_services_college_buses",
+    "group": "Transport Services",
+    "subcategory": "College Buses",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "college buses"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_services_bus_route_management",
+    "group": "Transport Services",
+    "subcategory": "Bus Route Management",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "bus route management",
+      "bus schedule",
+      "route"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_services_student_transportation",
+    "group": "Transport Services",
+    "subcategory": "Student Transportation",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "student transportation"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_services_faculty_staff_transportation",
+    "group": "Transport Services",
+    "subcategory": "Faculty / Staff Transportation",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "faculty",
+      "staff transportation"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_services_vehicle_maintenance",
+    "group": "Transport Services",
+    "subcategory": "Vehicle Maintenance",
+    "owner_department": "Transport",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "vehicle maintenance"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_services_driver_services",
+    "group": "Transport Services",
+    "subcategory": "Driver Services",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "driver services"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_services_transport_security",
+    "group": "Transport Services",
+    "subcategory": "Transport Security",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "transport security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "security_services_main_gate_security",
+    "group": "Security Services",
+    "subcategory": "Main Gate Security",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "main gate security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "security_services_hostel_security",
+    "group": "Security Services",
+    "subcategory": "Hostel Security",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "hostel security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "security_services_academic_block_security",
+    "group": "Security Services",
+    "subcategory": "Academic Block Security",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "academic block security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "academic"
+    ]
+  },
+  {
+    "id": "security_services_cctv_monitoring",
+    "group": "Security Services",
+    "subcategory": "CCTV Monitoring",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "cctv monitoring",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor",
+      "camera",
+      "surveillance"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "security_services_visitor_management",
+    "group": "Security Services",
+    "subcategory": "Visitor Management",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "visitor management",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "security_services_vehicle_parking_security",
+    "group": "Security Services",
+    "subcategory": "Vehicle / Parking Security",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "vehicle",
+      "parking security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "security_services_emergency_response",
+    "group": "Security Services",
+    "subcategory": "Emergency Response",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "emergency response",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "security_services_access_control",
+    "group": "Security Services",
+    "subcategory": "Access Control",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "access control",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "housekeeping_services_academic_blocks",
+    "group": "Housekeeping Services",
+    "subcategory": "Academic Blocks",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "academic blocks",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "academic"
+    ]
+  },
+  {
+    "id": "housekeeping_services_administrative_buildings",
+    "group": "Housekeeping Services",
+    "subcategory": "Administrative Buildings",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "administrative buildings",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "admin"
+    ]
+  },
+  {
+    "id": "housekeeping_services_hostels",
+    "group": "Housekeeping Services",
+    "subcategory": "Hostels",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "hostels",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "housekeeping_services_laboratories",
+    "group": "Housekeeping Services",
+    "subcategory": "Laboratories",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "laboratories",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "housekeeping_services_classrooms",
+    "group": "Housekeeping Services",
+    "subcategory": "Classrooms",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "classrooms",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "academic"
+    ]
+  },
+  {
+    "id": "housekeeping_services_washrooms",
+    "group": "Housekeeping Services",
+    "subcategory": "Washrooms",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "washrooms",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel"
+    ]
+  },
+  {
+    "id": "housekeeping_services_common_areas",
+    "group": "Housekeeping Services",
+    "subcategory": "Common Areas",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "common areas",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel"
+    ]
+  },
+  {
+    "id": "housekeeping_services_waste_collection",
+    "group": "Housekeeping Services",
+    "subcategory": "Waste Collection",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "waste collection",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage",
+      "trash",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "housekeeping_services_deep_cleaning",
+    "group": "Housekeeping Services",
+    "subcategory": "Deep Cleaning",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "deep cleaning",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "electrical_services_electrical_maintenance",
+    "group": "Electrical Services",
+    "subcategory": "Electrical Maintenance",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "electrical maintenance",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "electrical_services_power_supply",
+    "group": "Electrical Services",
+    "subcategory": "Power Supply",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "power supply",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "electrical_services_generators",
+    "group": "Electrical Services",
+    "subcategory": "Generators",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "generators",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "electrical_services_ups",
+    "group": "Electrical Services",
+    "subcategory": "UPS",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "ups",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "electrical_services_lighting",
+    "group": "Electrical Services",
+    "subcategory": "Lighting",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "lighting",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage",
+      "bulb",
+      "dark",
+      "lamp"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "electrical_services_electrical_panels",
+    "group": "Electrical Services",
+    "subcategory": "Electrical Panels",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "electrical panels",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "electrical_services_wiring_cabling",
+    "group": "Electrical Services",
+    "subcategory": "Wiring / Cabling",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "wiring",
+      "cabling",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "electrical_services_emergency_electrical_repairs",
+    "group": "Electrical Services",
+    "subcategory": "Emergency Electrical Repairs",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "emergency electrical repairs",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_building_repairs",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Building Repairs",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "building repairs",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_walls_flooring",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Walls / Flooring",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "walls",
+      "flooring",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_doors_windows",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Doors & Windows",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "doors",
+      "windows",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_roofing",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Roofing",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "roofing",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_plumbing",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Plumbing",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "plumbing",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_water_supply",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Water Supply",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "water supply",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_drainage",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Drainage",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "drainage",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step",
+      "sewage",
+      "blocked drain"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_sanitary_fixtures",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Sanitary Fixtures",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "sanitary fixtures",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "civil_plumbing_services_leakage_repairs",
+    "group": "Civil & Plumbing Services",
+    "subcategory": "Leakage Repairs",
+    "owner_department": "Civil",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "leakage repairs",
+      "pipe",
+      "water leak",
+      "faucet",
+      "tap",
+      "toilet",
+      "drain",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step",
+      "leaking ceiling",
+      "water seepage"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "library",
+      "admin"
+    ]
+  },
+  {
+    "id": "fire_safety_services_fire_extinguishers",
+    "group": "Fire & Safety Services",
+    "subcategory": "Fire Extinguishers",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "fire extinguishers",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "fire_safety_services_fire_alarm_systems",
+    "group": "Fire & Safety Services",
+    "subcategory": "Fire Alarm Systems",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "fire alarm systems",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "fire_safety_services_fire_hydrants",
+    "group": "Fire & Safety Services",
+    "subcategory": "Fire Hydrants",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "fire hydrants",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "fire_safety_services_sprinkler_systems",
+    "group": "Fire & Safety Services",
+    "subcategory": "Sprinkler Systems",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "sprinkler systems",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "fire_safety_services_emergency_exits",
+    "group": "Fire & Safety Services",
+    "subcategory": "Emergency Exits",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "emergency exits",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "fire_safety_services_fire_safety_inspections",
+    "group": "Fire & Safety Services",
+    "subcategory": "Fire Safety Inspections",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "fire safety inspections",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "fire_safety_services_emergency_drills",
+    "group": "Fire & Safety Services",
+    "subcategory": "Emergency Drills",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "emergency drills",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "fire_safety_services_safety_equipment",
+    "group": "Fire & Safety Services",
+    "subcategory": "Safety Equipment",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "safety equipment",
+      "smoke",
+      "flame",
+      "extinguisher",
+      "alarm",
+      "sprinkler"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hvac_ac_services_air_conditioning",
+    "group": "HVAC / AC Services",
+    "subcategory": "Air Conditioning",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "air conditioning",
+      "air conditioner",
+      "ac",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hvac_ac_services_hvac_maintenance",
+    "group": "HVAC / AC Services",
+    "subcategory": "HVAC Maintenance",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "hvac maintenance",
+      "air conditioner",
+      "ac",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hvac_ac_services_ac_repair",
+    "group": "HVAC / AC Services",
+    "subcategory": "AC Repair",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "ac repair",
+      "air conditioner",
+      "ac",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hvac_ac_services_ac_installation",
+    "group": "HVAC / AC Services",
+    "subcategory": "AC Installation",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "ac installation",
+      "air conditioner",
+      "ac",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hvac_ac_services_ventilation",
+    "group": "HVAC / AC Services",
+    "subcategory": "Ventilation",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "ventilation",
+      "air conditioner",
+      "ac",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hvac_ac_services_duct_maintenance",
+    "group": "HVAC / AC Services",
+    "subcategory": "Duct Maintenance",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "duct maintenance",
+      "air conditioner",
+      "ac",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "hvac_ac_services_temperature_control",
+    "group": "HVAC / AC Services",
+    "subcategory": "Temperature Control",
+    "owner_department": "HVAC",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "temperature control",
+      "air conditioner",
+      "ac",
+      "ventilation",
+      "duct",
+      "temperature"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "it_telecom_services_campus_wi_fi",
+    "group": "IT & Telecom Services",
+    "subcategory": "Campus Wi-Fi",
+    "owner_department": "IT",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "campus wi-fi"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "it_telecom_services_internet_network",
+    "group": "IT & Telecom Services",
+    "subcategory": "Internet / Network",
+    "owner_department": "IT",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "internet",
+      "network"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "it_telecom_services_lan",
+    "group": "IT & Telecom Services",
+    "subcategory": "LAN",
+    "owner_department": "IT",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "lan"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "it_telecom_services_telephone_epabx",
+    "group": "IT & Telecom Services",
+    "subcategory": "Telephone / EPABX",
+    "owner_department": "IT",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "telephone",
+      "epabx"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "it_telecom_services_cctv_network",
+    "group": "IT & Telecom Services",
+    "subcategory": "CCTV Network",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "cctv network",
+      "camera",
+      "surveillance"
+    ],
+    "applicable_building_types": [
+      "campus_wide"
+    ]
+  },
+  {
+    "id": "it_telecom_services_network_maintenance",
+    "group": "IT & Telecom Services",
+    "subcategory": "Network Maintenance",
+    "owner_department": "IT",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "network maintenance"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "it_telecom_services_it_infrastructure",
+    "group": "IT & Telecom Services",
+    "subcategory": "IT Infrastructure",
+    "owner_department": "IT",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "it infrastructure"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "it_telecom_services_computer_hardware_support",
+    "group": "IT & Telecom Services",
+    "subcategory": "Computer / Hardware Support",
+    "owner_department": "IT",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "computer",
+      "hardware support"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "laundry_services_hostel_laundry",
+    "group": "Laundry Services",
+    "subcategory": "Hostel Laundry",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "hostel laundry",
+      "washing",
+      "clothes"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "laundry_services_washing",
+    "group": "Laundry Services",
+    "subcategory": "Washing",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "washing",
+      "clothes"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "laundry_services_drying",
+    "group": "Laundry Services",
+    "subcategory": "Drying",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "drying",
+      "washing",
+      "clothes"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "laundry_services_ironing",
+    "group": "Laundry Services",
+    "subcategory": "Ironing",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "ironing",
+      "washing",
+      "clothes"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "laundry_services_laundry_collection_delivery",
+    "group": "Laundry Services",
+    "subcategory": "Laundry Collection / Delivery",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "laundry collection",
+      "delivery",
+      "washing",
+      "clothes"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "laundry_services_laundry_equipment_maintenance",
+    "group": "Laundry Services",
+    "subcategory": "Laundry Equipment Maintenance",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "laundry equipment maintenance",
+      "washing",
+      "clothes"
+    ],
+    "applicable_building_types": [
+      "hostel"
+    ]
+  },
+  {
+    "id": "mess_food_services_hostel_mess",
+    "group": "Mess / Food Services",
+    "subcategory": "Hostel Mess",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "hostel mess"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "mess_food_services_food_preparation",
+    "group": "Mess / Food Services",
+    "subcategory": "Food Preparation",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "food preparation"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "mess_food_services_dining_hall",
+    "group": "Mess / Food Services",
+    "subcategory": "Dining Hall",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "dining hall"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "mess_food_services_kitchen_maintenance",
+    "group": "Mess / Food Services",
+    "subcategory": "Kitchen Maintenance",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "kitchen maintenance"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "mess_food_services_drinking_water",
+    "group": "Mess / Food Services",
+    "subcategory": "Drinking Water",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "drinking water"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "mess_food_services_food_hygiene",
+    "group": "Mess / Food Services",
+    "subcategory": "Food Hygiene",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "food hygiene"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "mess_food_services_waste_management",
+    "group": "Mess / Food Services",
+    "subcategory": "Waste Management",
+    "owner_department": "Hostel Warden",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "waste management",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "mess_food_services_catering_events",
+    "group": "Mess / Food Services",
+    "subcategory": "Catering / Events",
+    "owner_department": "Hostel Warden",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "catering",
+      "events"
+    ],
+    "applicable_building_types": [
+      "hostel",
+      "food_service"
+    ]
+  },
+  {
+    "id": "transport_parking_student_parking",
+    "group": "Transport & Parking",
+    "subcategory": "Student Parking",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "student parking",
+      "vehicle",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_parking_faculty_staff_parking",
+    "group": "Transport & Parking",
+    "subcategory": "Faculty / Staff Parking",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "faculty",
+      "staff parking",
+      "vehicle",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_parking_visitor_parking",
+    "group": "Transport & Parking",
+    "subcategory": "Visitor Parking",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "visitor parking",
+      "vehicle",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_parking_two_wheeler_parking",
+    "group": "Transport & Parking",
+    "subcategory": "Two-Wheeler Parking",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "two-wheeler parking",
+      "vehicle",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_parking_four_wheeler_parking",
+    "group": "Transport & Parking",
+    "subcategory": "Four-Wheeler Parking",
+    "owner_department": "Transport",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "four-wheeler parking",
+      "vehicle",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_parking_parking_security",
+    "group": "Transport & Parking",
+    "subcategory": "Parking Security",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "parking security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor",
+      "vehicle",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "transport_parking_traffic_management",
+    "group": "Transport & Parking",
+    "subcategory": "Traffic Management",
+    "owner_department": "Transport",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "traffic management",
+      "vehicle",
+      "car",
+      "two-wheeler"
+    ],
+    "applicable_building_types": [
+      "transport",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_gardening",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Gardening",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "gardening"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_lawn_maintenance",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Lawn Maintenance",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "lawn maintenance"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_tree_maintenance",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Tree Maintenance",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "tree maintenance"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_landscaping",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Landscaping",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "landscaping"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_irrigation",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Irrigation",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "irrigation"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_campus_cleanliness",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Campus Cleanliness",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "campus cleanliness"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_pest_control",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Pest Control",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "pest control",
+      "rat",
+      "cockroach",
+      "mosquito",
+      "termite",
+      "pest"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "landscaping_campus_maintenance_outdoor_area_maintenance",
+    "group": "Landscaping & Campus Maintenance",
+    "subcategory": "Outdoor Area Maintenance",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "outdoor area maintenance"
+    ],
+    "applicable_building_types": [
+      "outdoor"
+    ]
+  },
+  {
+    "id": "waste_management_solid_waste_collection",
+    "group": "Waste Management",
+    "subcategory": "Solid Waste Collection",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "solid waste collection",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "lab"
+    ]
+  },
+  {
+    "id": "waste_management_wet_waste",
+    "group": "Waste Management",
+    "subcategory": "Wet Waste",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "wet waste",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "lab"
+    ]
+  },
+  {
+    "id": "waste_management_dry_waste",
+    "group": "Waste Management",
+    "subcategory": "Dry Waste",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "dry waste",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "lab"
+    ]
+  },
+  {
+    "id": "waste_management_e_waste",
+    "group": "Waste Management",
+    "subcategory": "E-Waste",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "e-waste",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "lab"
+    ]
+  },
+  {
+    "id": "waste_management_biomedical_laboratory_waste",
+    "group": "Waste Management",
+    "subcategory": "Biomedical / Laboratory Waste",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "biomedical",
+      "laboratory waste",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling",
+      "first aid",
+      "doctor",
+      "ambulance"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "waste_management_recycling",
+    "group": "Waste Management",
+    "subcategory": "Recycling",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "recycling",
+      "trash",
+      "garbage",
+      "litter"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "lab"
+    ]
+  },
+  {
+    "id": "waste_management_waste_segregation",
+    "group": "Waste Management",
+    "subcategory": "Waste Segregation",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "waste segregation",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "lab"
+    ]
+  },
+  {
+    "id": "waste_management_disposal",
+    "group": "Waste Management",
+    "subcategory": "Disposal",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "disposal",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "lab"
+    ]
+  },
+  {
+    "id": "student_administrative_services_admissions",
+    "group": "Student / Administrative Services",
+    "subcategory": "Admissions",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "admissions",
+      "enroll",
+      "application"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_student_affairs",
+    "group": "Student / Administrative Services",
+    "subcategory": "Student Affairs",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "student affairs"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_academic_administration",
+    "group": "Student / Administrative Services",
+    "subcategory": "Academic Administration",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "academic administration"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_examination",
+    "group": "Student / Administrative Services",
+    "subcategory": "Examination",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "examination",
+      "exam",
+      "grade",
+      "marks"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_accounts_finance",
+    "group": "Student / Administrative Services",
+    "subcategory": "Accounts / Finance",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "accounts",
+      "finance",
+      "fee",
+      "payment",
+      "refund"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_scholarships",
+    "group": "Student / Administrative Services",
+    "subcategory": "Scholarships",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "scholarships",
+      "financial aid"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_certificates_documents",
+    "group": "Student / Administrative Services",
+    "subcategory": "Certificates / Documents",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "certificates",
+      "documents"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_id_cards",
+    "group": "Student / Administrative Services",
+    "subcategory": "ID Cards",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "id cards"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "student_administrative_services_grievances",
+    "group": "Student / Administrative Services",
+    "subcategory": "Grievances",
+    "owner_department": "Student Services",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "grievances",
+      "complaint",
+      "appeal"
+    ],
+    "applicable_building_types": [
+      "admin",
+      "academic"
+    ]
+  },
+  {
+    "id": "medical_health_services_campus_medical_centre",
+    "group": "Medical / Health Services",
+    "subcategory": "Campus Medical Centre",
+    "owner_department": "Medical",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "campus medical centre",
+      "first aid",
+      "doctor",
+      "ambulance"
+    ],
+    "applicable_building_types": [
+      "medical"
+    ]
+  },
+  {
+    "id": "medical_health_services_first_aid",
+    "group": "Medical / Health Services",
+    "subcategory": "First Aid",
+    "owner_department": "Medical",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "first aid",
+      "doctor",
+      "ambulance"
+    ],
+    "applicable_building_types": [
+      "medical"
+    ]
+  },
+  {
+    "id": "medical_health_services_doctor_medical_consultation",
+    "group": "Medical / Health Services",
+    "subcategory": "Doctor / Medical Consultation",
+    "owner_department": "Medical",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "doctor",
+      "medical consultation",
+      "first aid",
+      "ambulance"
+    ],
+    "applicable_building_types": [
+      "medical"
+    ]
+  },
+  {
+    "id": "medical_health_services_emergency_medical_support",
+    "group": "Medical / Health Services",
+    "subcategory": "Emergency Medical Support",
+    "owner_department": "Medical",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "emergency medical support",
+      "first aid",
+      "doctor",
+      "ambulance"
+    ],
+    "applicable_building_types": [
+      "medical"
+    ]
+  },
+  {
+    "id": "medical_health_services_ambulance",
+    "group": "Medical / Health Services",
+    "subcategory": "Ambulance",
+    "owner_department": "Medical",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "ambulance",
+      "first aid",
+      "doctor"
+    ],
+    "applicable_building_types": [
+      "medical"
+    ]
+  },
+  {
+    "id": "medical_health_services_health_camps",
+    "group": "Medical / Health Services",
+    "subcategory": "Health Camps",
+    "owner_department": "Medical",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "health camps",
+      "first aid",
+      "doctor",
+      "ambulance"
+    ],
+    "applicable_building_types": [
+      "medical"
+    ]
+  },
+  {
+    "id": "medical_health_services_pharmacy_medicines",
+    "group": "Medical / Health Services",
+    "subcategory": "Pharmacy / Medicines",
+    "owner_department": "Medical",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "pharmacy",
+      "medicines",
+      "first aid",
+      "doctor",
+      "ambulance"
+    ],
+    "applicable_building_types": [
+      "medical"
+    ]
+  },
+  {
+    "id": "library_services_book_services",
+    "group": "Library Services",
+    "subcategory": "Book Services",
+    "owner_department": "Library",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "book services",
+      "borrow",
+      "reserve book"
+    ],
+    "applicable_building_types": [
+      "library"
+    ]
+  },
+  {
+    "id": "library_services_digital_library",
+    "group": "Library Services",
+    "subcategory": "Digital Library",
+    "owner_department": "Library",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "digital library"
+    ],
+    "applicable_building_types": [
+      "library"
+    ]
+  },
+  {
+    "id": "library_services_journals_research_papers",
+    "group": "Library Services",
+    "subcategory": "Journals / Research Papers",
+    "owner_department": "Library",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "journals",
+      "research papers"
+    ],
+    "applicable_building_types": [
+      "library"
+    ]
+  },
+  {
+    "id": "library_services_reading_rooms",
+    "group": "Library Services",
+    "subcategory": "Reading Rooms",
+    "owner_department": "Library",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "reading rooms"
+    ],
+    "applicable_building_types": [
+      "library"
+    ]
+  },
+  {
+    "id": "library_services_computer_internet_facilities",
+    "group": "Library Services",
+    "subcategory": "Computer / Internet Facilities",
+    "owner_department": "Library",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "computer",
+      "internet facilities"
+    ],
+    "applicable_building_types": [
+      "library"
+    ]
+  },
+  {
+    "id": "library_services_book_issue_return",
+    "group": "Library Services",
+    "subcategory": "Book Issue / Return",
+    "owner_department": "Library",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "book issue",
+      "return"
+    ],
+    "applicable_building_types": [
+      "library"
+    ]
+  },
+  {
+    "id": "library_services_library_maintenance",
+    "group": "Library Services",
+    "subcategory": "Library Maintenance",
+    "owner_department": "Library",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "library maintenance"
+    ],
+    "applicable_building_types": [
+      "library"
+    ]
+  },
+  {
+    "id": "sports_recreation_indoor_sports",
+    "group": "Sports & Recreation",
+    "subcategory": "Indoor Sports",
+    "owner_department": "Facilities",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "indoor sports"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "sports_recreation_outdoor_sports",
+    "group": "Sports & Recreation",
+    "subcategory": "Outdoor Sports",
+    "owner_department": "Facilities",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "outdoor sports"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "sports_recreation_gymnasium",
+    "group": "Sports & Recreation",
+    "subcategory": "Gymnasium",
+    "owner_department": "Facilities",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "gymnasium"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "sports_recreation_sports_grounds",
+    "group": "Sports & Recreation",
+    "subcategory": "Sports Grounds",
+    "owner_department": "Facilities",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "sports grounds"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "sports_recreation_sports_equipment",
+    "group": "Sports & Recreation",
+    "subcategory": "Sports Equipment",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "sports equipment"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "sports_recreation_swimming_pool_aquatic_facilities",
+    "group": "Sports & Recreation",
+    "subcategory": "Swimming Pool / Aquatic Facilities",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 4,
+    "sla_hours": 8,
+    "keywords": [
+      "swimming pool",
+      "aquatic facilities"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "sports_recreation_sports_events",
+    "group": "Sports & Recreation",
+    "subcategory": "Sports Events",
+    "owner_department": "Facilities",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "sports events"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "sports_recreation_maintenance",
+    "group": "Sports & Recreation",
+    "subcategory": "Maintenance",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "maintenance"
+    ],
+    "applicable_building_types": [
+      "sports",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_laboratory_equipment",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Laboratory Equipment",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "laboratory equipment"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_equipment_maintenance",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Equipment Maintenance",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "equipment maintenance"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_electrical_electronic_labs",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Electrical / Electronic Labs",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "electrical",
+      "electronic labs",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_computer_labs",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Computer Labs",
+    "owner_department": "IT",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "computer labs"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_mechanical_labs",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Mechanical Labs",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "mechanical labs"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_civil_labs",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Civil Labs",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "civil labs",
+      "crack",
+      "wall",
+      "floor",
+      "roof",
+      "door",
+      "window",
+      "step"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_chemical_science_labs",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Chemical / Science Labs",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "chemical",
+      "science labs"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "laboratories_technical_facilities_safety_equipment",
+    "group": "Laboratories & Technical Facilities",
+    "subcategory": "Safety Equipment",
+    "owner_department": "Fire & Safety",
+    "intent": "hazard",
+    "default_severity": 5,
+    "sla_hours": 1,
+    "keywords": [
+      "safety equipment"
+    ],
+    "applicable_building_types": [
+      "lab"
+    ]
+  },
+  {
+    "id": "procurement_stores_purchase_requests",
+    "group": "Procurement / Stores",
+    "subcategory": "Purchase Requests",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "purchase requests"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "procurement_stores_vendor_management",
+    "group": "Procurement / Stores",
+    "subcategory": "Vendor Management",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "vendor management"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "procurement_stores_material_procurement",
+    "group": "Procurement / Stores",
+    "subcategory": "Material Procurement",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "material procurement"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "procurement_stores_inventory",
+    "group": "Procurement / Stores",
+    "subcategory": "Inventory",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "inventory"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "procurement_stores_stock_management",
+    "group": "Procurement / Stores",
+    "subcategory": "Stock Management",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "stock management"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "procurement_stores_equipment_procurement",
+    "group": "Procurement / Stores",
+    "subcategory": "Equipment Procurement",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "equipment procurement"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "procurement_stores_furniture_procurement",
+    "group": "Procurement / Stores",
+    "subcategory": "Furniture Procurement",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "furniture procurement"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "procurement_stores_stationery",
+    "group": "Procurement / Stores",
+    "subcategory": "Stationery",
+    "owner_department": "Procurement",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "stationery"
+    ],
+    "applicable_building_types": [
+      "academic",
+      "admin",
+      "hostel",
+      "lab",
+      "library"
+    ]
+  },
+  {
+    "id": "environment_sustainability_solar_renewable_energy",
+    "group": "Environment & Sustainability",
+    "subcategory": "Solar / Renewable Energy",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "solar",
+      "renewable energy"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "environment_sustainability_rainwater_harvesting",
+    "group": "Environment & Sustainability",
+    "subcategory": "Rainwater Harvesting",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "rainwater harvesting"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "environment_sustainability_water_conservation",
+    "group": "Environment & Sustainability",
+    "subcategory": "Water Conservation",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "water conservation"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "environment_sustainability_waste_management",
+    "group": "Environment & Sustainability",
+    "subcategory": "Waste Management",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "waste management",
+      "trash",
+      "garbage",
+      "litter",
+      "recycling"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "environment_sustainability_energy_management",
+    "group": "Environment & Sustainability",
+    "subcategory": "Energy Management",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "energy management"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "environment_sustainability_green_campus",
+    "group": "Environment & Sustainability",
+    "subcategory": "Green Campus",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "green campus"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "environment_sustainability_environmental_monitoring",
+    "group": "Environment & Sustainability",
+    "subcategory": "Environmental Monitoring",
+    "owner_department": "Facilities",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "environmental monitoring"
+    ],
+    "applicable_building_types": [
+      "campus_wide",
+      "outdoor"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_auditorium",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Auditorium",
+    "owner_department": "Events",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "auditorium"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_seminar_halls",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Seminar Halls",
+    "owner_department": "Events",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "seminar halls"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_conference_rooms",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Conference Rooms",
+    "owner_department": "Events",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "conference rooms"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_event_setup",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Event Setup",
+    "owner_department": "Events",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "event setup"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_stage_audio_visual_equipment",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Stage / Audio-Visual Equipment",
+    "owner_department": "Events",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "stage",
+      "audio-visual equipment"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_furniture_arrangement",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Furniture Arrangement",
+    "owner_department": "Events",
+    "intent": "service_request",
+    "default_severity": null,
+    "sla_hours": 48,
+    "keywords": [
+      "furniture arrangement"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_electrical_lighting_support",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Electrical / Lighting Support",
+    "owner_department": "Electrical",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "electrical",
+      "lighting support",
+      "wire",
+      "power",
+      "shock",
+      "short circuit",
+      "outage",
+      "bulb",
+      "dark",
+      "lamp"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_event_security",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Event Security",
+    "owner_department": "Security",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "event security",
+      "theft",
+      "intruder",
+      "suspicious",
+      "access",
+      "visitor"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  },
+  {
+    "id": "events_campus_facilities_housekeeping",
+    "group": "Events & Campus Facilities",
+    "subcategory": "Housekeeping",
+    "owner_department": "Housekeeping",
+    "intent": "hazard",
+    "default_severity": 3,
+    "sla_hours": 24,
+    "keywords": [
+      "housekeeping",
+      "cleaning",
+      "dirty",
+      "spill",
+      "garbage"
+    ],
+    "applicable_building_types": [
+      "event"
+    ]
+  }
+]

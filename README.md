@@ -35,6 +35,21 @@
               └──────────────────────┘
 ```
 
+### Catalog classification pipeline
+
+```mermaid
+flowchart LR
+    A[Report text + image] --> B[Prompt injection guard]
+    B --> C[Embed and retrieve top 6 by building type]
+    C --> D[Gemini structured classification]
+    D --> E[Confidence check]
+    E --> F[Reporter confirms if needed]
+    F --> G[Route to catalog owner]
+    G --> H[Return report, SLA, and next action]
+```
+
+The catalog contains 185 distinct sub-services across the 24 supplied groups. Repeated services remain separate where their building context or owner differs. Gemini model names are configured through `GEMINI_MODEL` and `EMBEDDING_MODEL`; the classifier falls back to catalog keyword matching when Gemini is unavailable. SQLite startup applies an additive migration for catalog fields and location building types without dropping existing rows.
+
 ## Setup (Local Development)
 
 ### 1. Clone and configure
@@ -44,6 +59,7 @@ git clone <repo>
 cd SOS
 cp .env.example .env
 # Edit .env — add your GEMINI_API_KEY and a random JWT_SECRET
+cp .env.example backend/.env   # backend reads .env from its working directory
 ```
 
 ### 2. Backend
@@ -100,6 +116,11 @@ Backend → [http://localhost:8000](http://localhost:8000)
 | Electrical | raj.elec@university.edu | auth123 |
 | Civil | priya.civil@university.edu | auth123 |
 | Security | suresh.sec@university.edu | auth123 |
+| Hostel Warden | warden@university.edu | auth123 |
+| IT | it@university.edu | auth123 |
+| Fire & Safety | fire.safety@university.edu | auth123 |
+| Housekeeping | housekeeping@university.edu | auth123 |
+| HVAC | hvac@university.edu | auth123 |
 | Student | arjun@student.edu | student123 |
 | Student | sneha@student.edu | student123 |
 
@@ -128,6 +149,19 @@ Backend → [http://localhost:8000](http://localhost:8000)
 | GET | /analytics/summary | admin | Full analytics |
 | GET | /locations | JWT | Campus locations |
 | GET | /health | — | Health check |
+
+Reports now also include `intent`, `service_group`, `service_subcategory`, `catalog_id`, three confidence values, `prompt_version`, and `sla_hours`. When group confidence is at least 0.6 but subcategory confidence is below 0.6, the create response includes up to three choices; the reporter can confirm one with `PATCH /reports/{id}/classification`.
+
+## Catalog Evaluation
+
+The evaluation set is synthetic and includes overlapping service cases, service requests, and unrelated reports. Run the local baselines and Gemini configurations with:
+
+```bash
+cd backend
+python scripts/eval_catalog.py
+```
+
+The script compares keyword matching, TF-IDF + LogisticRegression, full-catalog Gemini zero-shot, and top-6 retrieval + few-shot Gemini, then writes `docs/RESULTS.md`. Gemini metrics require an API key with request quota. See the results document for configurations that could not run because the configured project had no API quota.
 
 ---
 

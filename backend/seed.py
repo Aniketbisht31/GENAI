@@ -12,11 +12,12 @@ from datetime import datetime, timedelta
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-from app.database import SessionLocal, engine, Base
+from app.database import SessionLocal, engine, Base, apply_sqlite_migrations
 from app.models import User, Report, Hype, StatusLog, Location, Notification, UserRole, ReportStatus
 from app.routers.auth import hash_password
 from app.services.priority_engine import compute_priority
 
+apply_sqlite_migrations()
 Base.metadata.create_all(bind=engine)
 db = SessionLocal()
 
@@ -32,22 +33,22 @@ print("Cleared existing data.")
 
 # ── Locations ─────────────────────────────────────────────────────────────────
 locations_data = [
-    ("Main Library", "Ground Floor", 3),
-    ("Main Library", "First Floor", 3),
-    ("Engineering Block A", "Lab Wing", 5),
-    ("Engineering Block B", "Corridor", 4),
-    ("Hostel Block 1", "Common Room", 4),
-    ("Hostel Block 2", "Stairwell", 5),
-    ("Canteen", "Main Hall", 3),
-    ("Sports Complex", "Gym", 2),
-    ("Admin Building", "Reception", 3),
-    ("Science Block", "Chemistry Lab", 5),
-    ("Parking Lot", "North Entrance", 2),
-    ("Medical Centre", "Waiting Area", 4),
+    ("Main Library", "Ground Floor", 3, "library"),
+    ("Main Library", "First Floor", 3, "library"),
+    ("Engineering Block A", "Lab Wing", 5, "lab"),
+    ("Engineering Block B", "Corridor", 4, "academic"),
+    ("Hostel Block 1", "Common Room", 4, "hostel"),
+    ("Hostel Block 2", "Stairwell", 5, "hostel"),
+    ("Canteen", "Main Hall", 3, "food_service"),
+    ("Sports Complex", "Gym", 2, "sports"),
+    ("Admin Building", "Reception", 3, "admin"),
+    ("Science Block", "Chemistry Lab", 5, "lab"),
+    ("Parking Lot", "North Entrance", 2, "transport"),
+    ("Medical Centre", "Waiting Area", 4, "medical"),
 ]
 locs = []
-for building, zone, criticality in locations_data:
-    loc = Location(building=building, zone=zone, criticality=criticality)
+for building, zone, criticality, building_type in locations_data:
+    loc = Location(building=building, zone=zone, criticality=criticality, building_type=building_type)
     db.add(loc)
     locs.append(loc)
 db.commit()
@@ -68,6 +69,18 @@ authorities = [
          password_hash=hash_password("auth123"), role=UserRole.authority, department="Civil"),
     User(name="Suresh Security", email="suresh.sec@university.edu",
          password_hash=hash_password("auth123"), role=UserRole.authority, department="Security"),
+    User(name="Hostel Warden", email="warden@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Hostel Warden"),
+    User(name="Campus IT", email="it@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="IT"),
+    User(name="Fire & Safety Officer", email="fire.safety@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Fire & Safety"),
+    User(name="Housekeeping Lead", email="housekeeping@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Housekeeping"),
+    User(name="HVAC Technician", email="hvac@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="HVAC"),
+    User(name="Transport Coordinator", email="transport@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Transport"),
+    User(name="Student Services Officer", email="student.services@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Student Services"),
+    User(name="Medical Centre Lead", email="medical@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Medical"),
+    User(name="Librarian", email="library@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Library"),
+    User(name="Facilities Coordinator", email="facilities@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Facilities"),
+    User(name="Procurement Officer", email="procurement@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Procurement"),
+    User(name="Events Coordinator", email="events@university.edu", password_hash=hash_password("auth123"), role=UserRole.authority, department="Events"),
 ]
 for a in authorities:
     db.add(a)
@@ -124,7 +137,17 @@ reports_data = [
 
 # Department mapping
 DEPT_MAP = {"electrical": "Electrical", "civil": "Civil", "security": "Security", "other": "Admin"}
-AUTH_MAP = {"Electrical": authorities[0], "Civil": authorities[1], "Security": authorities[2], "Admin": admin}
+AUTH_MAP = {a.department: a for a in authorities}
+AUTH_MAP["Admin"] = admin
+CATALOG_EXAMPLES = {
+    "electrical": ("Electrical Services", "Lighting"),
+    "civil": ("Civil & Plumbing Services", "Building Repairs"),
+    "security": ("Security Services", "CCTV Monitoring"),
+    "other": ("Facility Services", "General Maintenance"),
+}
+from app.services.catalog_classifier import load_catalog
+catalog_entries = load_catalog()
+catalog_by_group_subcategory = {(entry["group"], entry["subcategory"]): entry for entry in catalog_entries}
 
 created_reports = []
 base_time = datetime.utcnow() - timedelta(days=25)
@@ -132,7 +155,9 @@ base_time = datetime.utcnow() - timedelta(days=25)
 for i, (title, desc, building, zone, htype, cat, sev, critical, status, hype, recurrence) in enumerate(reports_data):
     reporter = random.choice(students)
     dept = DEPT_MAP.get(cat, "Admin")
-    authority = AUTH_MAP[dept]
+    authority = AUTH_MAP.get(dept, admin)
+    group, subcategory = CATALOG_EXAMPLES[cat]
+    catalog_entry = catalog_by_group_subcategory[(group, subcategory)]
 
     created_at = base_time + timedelta(days=i, hours=random.randint(0, 10))
     resolved_at = None
@@ -152,6 +177,16 @@ for i, (title, desc, building, zone, htype, cat, sev, critical, status, hype, re
         ai_summary=title,
         ai_reasoning=f"AI detected {htype} with severity {sev}.",
         ai_confidence=round(random.uniform(0.75, 0.98), 2),
+        intent="hazard",
+        is_campus_related=True,
+        service_group=group,
+        service_subcategory=subcategory,
+        catalog_id=catalog_entry["id"],
+        intent_confidence=round(random.uniform(0.75, 0.98), 2),
+        group_confidence=round(random.uniform(0.75, 0.98), 2),
+        subcategory_confidence=round(random.uniform(0.75, 0.98), 2),
+        prompt_version="v2",
+        sla_hours=catalog_entry["sla_hours"],
         status=status,
         assigned_department=dept,
         assigned_to=authority.id if status != "reported" else None,

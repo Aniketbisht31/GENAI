@@ -44,6 +44,7 @@ class LocationOut(BaseModel):
     building: str
     zone: Optional[str]
     criticality: int
+    building_type: str = "campus_wide"
 
     class Config:
         from_attributes = True
@@ -59,6 +60,16 @@ class AIResult(BaseModel):
     summary: Optional[str] = None
     reasoning: Optional[str] = None
     confidence: Optional[float] = None
+    intent: Optional[str] = None
+    is_campus_related: bool = True
+    service_group: Optional[str] = None
+    service_subcategory: Optional[str] = None
+    catalog_id: Optional[str] = None
+    intent_confidence: Optional[float] = None
+    group_confidence: Optional[float] = None
+    subcategory_confidence: Optional[float] = None
+    prompt_version: Optional[str] = None
+    candidates: List[dict] = Field(default_factory=list)
 
 
 class PriorityBreakdown(BaseModel):
@@ -99,6 +110,17 @@ class ReportOut(BaseModel):
     ai_summary: Optional[str]
     ai_reasoning: Optional[str]
     ai_confidence: Optional[float]
+    intent: str = "hazard"
+    is_campus_related: bool = True
+    service_group: Optional[str] = None
+    service_subcategory: Optional[str] = None
+    catalog_id: Optional[str] = None
+    intent_confidence: Optional[float] = None
+    group_confidence: Optional[float] = None
+    subcategory_confidence: Optional[float] = None
+    prompt_version: Optional[str] = None
+    confirmation_candidates: List[dict] = Field(default_factory=list)
+    sla_hours: Optional[int] = None
     status: ReportStatus
     assigned_department: Optional[str]
     priority_score: float
@@ -139,6 +161,10 @@ class ReportListItem(BaseModel):
     reporter_name: Optional[str] = None
     current_user_hyped: bool = False
     image_path: Optional[str] = None
+    intent: str = "hazard"
+    service_group: Optional[str] = None
+    service_subcategory: Optional[str] = None
+    prompt_version: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -162,6 +188,10 @@ class StatusUpdate(BaseModel):
 class AssignUpdate(BaseModel):
     assigned_to: int
     note: Optional[str] = None
+
+
+class CatalogChoice(BaseModel):
+    catalog_id: str
 
 
 # ── Hype ──────────────────────────────────────────────────────────────────────
@@ -229,3 +259,4 @@ class AnalyticsSummary(BaseModel):
     reports_per_day: List[dict]
     hype_leaderboard: List[dict]
     resolution_by_department: List[dict]
+    by_service_group: dict = Field(default_factory=dict)

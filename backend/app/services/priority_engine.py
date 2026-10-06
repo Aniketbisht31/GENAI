@@ -77,7 +77,8 @@ def compute_priority(
         ).first()
         location_criticality = loc.criticality if loc else 3
 
-    sev = _severity_norm(report.severity)
+    is_service_request = (getattr(report, "intent", None) or "hazard") == "service_request"
+    sev = 0.0 if is_service_request else _severity_norm(report.severity)
     hype = _hype_norm(report.hype_count)
     rec = _recurrence_norm(report.recurrence_count)
     loc = _location_norm(location_criticality)
@@ -89,7 +90,7 @@ def compute_priority(
 
     # Safety-critical override
     safety_override = False
-    if report.is_safety_critical and final < 90:
+    if report.is_safety_critical and not is_service_request and final < 90:
         final = 90.0
         safety_override = True
 

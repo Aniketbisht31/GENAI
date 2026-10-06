@@ -22,6 +22,7 @@ frontend/dist/
 
 # Uploads
 backend/uploads/
+backend/app/data/service_catalog_embeddings.json
 
 # Kiro internal
 .kiro/

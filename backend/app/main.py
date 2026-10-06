@@ -3,13 +3,14 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.database import engine, Base
+from app.database import engine, Base, apply_sqlite_migrations
 from app.core.config import get_settings
 from app.routers import auth, reports, notifications, analytics, locations
 
 settings = get_settings()
 
 # Create tables
+apply_sqlite_migrations()
 Base.metadata.create_all(bind=engine)
 
 # Create uploads dir

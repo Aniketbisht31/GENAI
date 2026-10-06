@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 
 from app.models import Report, ReportStatus
 from app.core.config import get_settings
+from app.core.gemini_rate_limit import wait_for_gemini_slot
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -49,17 +50,44 @@ async def generate_embedding(text: str) -> Optional[List[float]]:
         logger.warning("No GEMINI_API_KEY — embedding generation skipped")
         return None
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=settings.gemini_api_key)
-        result = genai.embed_content(
-            model="models/text-embedding-004",
-            content=text,
-            task_type="SEMANTIC_SIMILARITY"
+        from google import genai
+        client = genai.Client(api_key=settings.gemini_api_key)
+        wait_for_gemini_slot()
+        result = client.models.embed_content(
+            model=settings.embedding_model,
+            contents=f"task: semantic similarity | text: {text}",
         )
-        return result["embedding"]
+        return result.embeddings[0].values if result.embeddings else None
     except Exception as e:
         logger.error(f"Embedding generation failed: {e}")
         return None
+
+
+async def generate_embeddings(texts: List[str]) -> List[Optional[List[float]]]:
+    """Embed multiple independent texts in one catalog initialization request."""
+    if not settings.gemini_api_key:
+        logger.warning("No GEMINI_API_KEY — embedding generation skipped")
+        return [None] * len(texts)
+    try:
+        from google import genai
+        from google.genai import types
+        client = genai.Client(api_key=settings.gemini_api_key)
+        embeddings = []
+        for offset in range(0, len(texts), 80):
+            contents = [
+                types.Content(parts=[types.Part.from_text(text=f"task: semantic similarity | text: {text}")])
+                for text in texts[offset:offset + 80]
+            ]
+            wait_for_gemini_slot()
+            result = client.models.embed_content(
+                model=settings.embedding_model,
+                contents=contents,
+            )
+            embeddings.extend(item.values for item in (result.embeddings or []))
+        return embeddings
+    except Exception as e:
+        logger.error(f"Batch embedding generation failed: {e}")
+        return [None] * len(texts)
 
 
 def _embedding_text(report: Report) -> str:
