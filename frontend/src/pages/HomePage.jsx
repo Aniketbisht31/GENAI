@@ -3,6 +3,8 @@ import { reportsAPI, locationsAPI } from '../api/client'
 import ReportCard from '../components/ReportCard'
 import { ReportCardSkeleton, EmptyState } from '../components/UI'
 import { Search, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
+import PageCard from '../components/PageCard'
+import Tabs from '../components/Tabs'
 
 const STATUSES = ['reported', 'assigned', 'in_progress', 'pending_confirmation', 'resolved', 'reopened']
 const CATEGORIES = ['electrical', 'civil', 'security', 'other']
@@ -53,40 +55,21 @@ export default function HomePage() {
   const buildings = [...new Set(locations.map(l => l.building))]
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-xl font-bold text-gray-900">Campus Hazard Feed</h1>
-          <p className="text-sm text-gray-500">{total} report{total !== 1 ? 's' : ''} found</p>
-        </div>
-        <button
+    <div className="mx-auto max-w-4xl">
+      <PageCard title="Campus Hazard Feed" actions={<><span className="hidden text-xs text-blue-50 sm:inline">{total} report{total !== 1 ? 's' : ''} found</span><button
           onClick={() => setShowFilters(!showFilters)}
-          className={`flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg border transition-colors ${
-            showFilters ? 'bg-red-50 border-red-200 text-red-600' : 'border-gray-200 text-gray-600 hover:border-gray-300'
+          aria-expanded={showFilters}
+          className={`flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors ${
+            showFilters ? 'border-white bg-white text-primary' : 'border-white/50 text-white hover:bg-white/10'
           }`}
         >
           <SlidersHorizontal size={14} />
           Filters
-        </button>
-      </div>
+        </button></>}>
+      <p className="mb-3 text-xs text-slate-500 sm:hidden">{total} report{total !== 1 ? 's' : ''} found</p>
 
       {/* Sort pills */}
-      <div className="flex gap-2 mb-3 overflow-x-auto pb-1">
-        {SORTS.map(s => (
-          <button
-            key={s.value}
-            onClick={() => setFilter('sort')(s.value)}
-            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
-              filters.sort === s.value
-                ? 'bg-red-600 text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
+      <Tabs className="mb-4" value={filters.sort} onChange={value => setFilter('sort')(value)} items={SORTS.map(s => ({ key: s.value, label: s.label }))} />
 
       {/* Filter panel */}
       {showFilters && (
@@ -113,7 +96,7 @@ export default function HomePage() {
             </select>
           </div>
           <div className="col-span-2 sm:col-span-3">
-            <button className="text-xs text-red-600 hover:underline" onClick={() => {
+            <button className="text-xs font-semibold text-primary hover:underline" onClick={() => {
               setFilters({ status: '', category: '', building: '', sort: 'priority' }); setPage(1)
             }}>
               Clear all filters
@@ -152,6 +135,7 @@ export default function HomePage() {
           </button>
         </div>
       )}
+      </PageCard>
     </div>
   )
 }

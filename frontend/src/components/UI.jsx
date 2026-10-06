@@ -21,7 +21,7 @@ export function CategoryBadge({ category }) {
   const colors = {
     electrical: 'bg-yellow-100 text-yellow-800',
     civil: 'bg-blue-100 text-blue-800',
-    security: 'bg-red-100 text-red-800',
+    security: 'bg-slate-100 text-slate-800',
     other: 'bg-gray-100 text-gray-800',
   }
   return (
@@ -51,7 +51,7 @@ export function ReportCardSkeleton() {
 
 // ── Priority Bar ──────────────────────────────────────────────────────────────
 export function PriorityBar({ score }) {
-  const color = score >= 80 ? 'bg-red-500' : score >= 50 ? 'bg-orange-400' : score >= 30 ? 'bg-amber-400' : 'bg-green-400'
+  const color = score >= 80 ? 'bg-table-purple' : score >= 50 ? 'bg-primary' : score >= 30 ? 'bg-sky-500' : 'bg-green-500'
   return (
     <div className="flex items-center gap-2">
       <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
@@ -77,7 +77,7 @@ export function EmptyState({ icon = '📭', title = 'Nothing here yet', descript
 export function Spinner({ size = 'md' }) {
   const sz = size === 'sm' ? 'h-4 w-4' : size === 'lg' ? 'h-8 w-8' : 'h-6 w-6'
   return (
-    <div className={`${sz} border-2 border-red-500 border-t-transparent rounded-full animate-spin`} />
+    <div role="status" aria-label="Loading" className={`${sz} border-2 border-primary border-t-transparent rounded-full animate-spin`} />
   )
 }
 

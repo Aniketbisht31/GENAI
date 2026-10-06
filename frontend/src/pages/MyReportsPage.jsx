@@ -3,6 +3,7 @@ import { reportsAPI } from '../api/client'
 import ReportCard from '../components/ReportCard'
 import { ReportCardSkeleton, EmptyState } from '../components/UI'
 import { Link } from 'react-router-dom'
+import PageCard from '../components/PageCard'
 
 export default function MyReportsPage() {
   const [reports, setReports] = useState([])
@@ -16,12 +17,8 @@ export default function MyReportsPage() {
   }, [])
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-gray-900">My Reports</h1>
-        <Link to="/report/new" className="btn-primary text-sm py-1.5 px-3">+ New Report</Link>
-      </div>
-
+    <div className="mx-auto max-w-4xl">
+      <PageCard title="My Reports" actions={<Link to="/report/new" className="inline-flex items-center rounded-md border border-white/70 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-white hover:text-primary">+ New Report</Link>}>
       <div className="space-y-3">
         {loading
           ? Array.from({ length: 3 }).map((_, i) => <ReportCardSkeleton key={i} />)
@@ -30,6 +27,7 @@ export default function MyReportsPage() {
             : reports.map(r => <ReportCard key={r.id} report={r} />)
         }
       </div>
+      </PageCard>
     </div>
   )
 }

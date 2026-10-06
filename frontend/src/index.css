@@ -1,47 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-gray-50 text-gray-900 antialiased;
-  }
+  html { font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif; }
+  body { @apply bg-page text-gray-800 antialiased; }
+  button, a, input, select, textarea { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2; }
+  button:disabled { @apply cursor-not-allowed opacity-60; }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 font-semibold text-white shadow-sm transition-colors hover:bg-primary-dark focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-secondary {
-    @apply bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50;
   }
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-4;
+    @apply rounded-md border border-slate-200 bg-white p-4 shadow-sm;
   }
   .input {
-    @apply w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent;
+    @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30;
   }
-  .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
-  }
+  .badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold; }
 }
 
-/* Severity colors */
+/* Severity colors remain distinct so red is reserved for critical hazards. */
 .severity-1 { @apply bg-green-100 text-green-800; }
 .severity-2 { @apply bg-lime-100 text-lime-800; }
-.severity-3 { @apply bg-amber-100 text-amber-800; }
-.severity-4 { @apply bg-orange-100 text-orange-800; }
+.severity-3 { @apply bg-amber-100 text-amber-900; }
+.severity-4 { @apply bg-orange-100 text-orange-900; }
 .severity-5 { @apply bg-red-100 text-red-800; }
 
 /* Status colors */
-.status-reported       { @apply bg-blue-100 text-blue-800; }
-.status-assigned       { @apply bg-purple-100 text-purple-800; }
-.status-in_progress    { @apply bg-yellow-100 text-yellow-800; }
-.status-pending_confirmation { @apply bg-orange-100 text-orange-800; }
-.status-resolved       { @apply bg-green-100 text-green-800; }
-.status-reopened       { @apply bg-red-100 text-red-800; }
+.status-reported { @apply bg-blue-100 text-blue-800; }
+.status-assigned { @apply bg-purple-100 text-purple-800; }
+.status-in_progress { @apply bg-yellow-100 text-yellow-900; }
+.status-pending_confirmation { @apply bg-orange-100 text-orange-900; }
+.status-resolved { @apply bg-green-100 text-green-800; }
+.status-reopened { @apply bg-red-100 text-red-800; }
 
-/* Skeleton loader animation */
-.skeleton {
-  @apply bg-gray-200 rounded animate-pulse;
-}
+.skeleton { @apply animate-pulse rounded bg-gray-200; }

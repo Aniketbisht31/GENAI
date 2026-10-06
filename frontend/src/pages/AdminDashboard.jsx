@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import { analyticsAPI, reportsAPI } from '../api/client'
 import { Spinner, EmptyState } from '../components/UI'
 import toast from 'react-hot-toast'
+import PageCard from '../components/PageCard'
+import DataTable from '../components/DataTable'
+import Tabs from '../components/Tabs'
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, FunnelChart, Funnel, LabelList
 } from 'recharts'
 
-const COLORS = ['#ef4444', '#f97316', '#f59e0b', '#22c55e', '#3b82f6', '#8b5cf6']
+const COLORS = ['#337ab7', '#6a00c9', '#4f8fc4', '#8b5cf6', '#286090', '#a78bfa']
 
 const KPICard = ({ label, value, sub, color = 'text-gray-900' }) => (
   <div className="card text-center">
@@ -67,31 +70,21 @@ export default function AdminDashboard() {
 
   const statusFunnel = Object.entries(data.by_status).map(([name, value]) => ({ name, value }))
   const categoryData = Object.entries(data.by_category).map(([name, value]) => ({ name, value }))
+  const serviceGroupData = Object.entries(data.by_service_group || {})
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value)
   const flaggedReports = allReports.filter(r => r.status === 'pending_confirmation')
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-gray-900">Admin Dashboard</h1>
-        <div className="flex gap-2">
-          <button onClick={simulateHypeSurge} disabled={hyping} className="btn-secondary text-xs py-1.5 px-3">
+    <div className="mx-auto max-w-7xl">
+      <PageCard title="Admin Dashboard" actions={<><button onClick={simulateHypeSurge} disabled={hyping} className="rounded-md border border-white/70 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white hover:text-primary">
             {hyping ? <Spinner size="sm" /> : '🔥 Simulate Hype Surge'}
-          </button>
-          <button onClick={seedDemo} disabled={seedLoading} className="btn-primary text-xs py-1.5 px-3">
+          </button><button onClick={seedDemo} disabled={seedLoading} className="rounded-md bg-white px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-blue-50">
             {seedLoading ? <Spinner size="sm" /> : '🌱 Refresh Demo Data'}
-          </button>
-        </div>
-      </div>
+          </button></>}>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 p-1 rounded-xl mb-6 w-fit">
-        {['overview', 'hotspots', 'recurring', 'flagged', 'hype'].map(t => (
-          <button key={t} onClick={() => setTab(t)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all ${tab === t ? 'bg-white shadow text-gray-900' : 'text-gray-500'}`}>
-            {t}
-          </button>
-        ))}
-      </div>
+      <Tabs className="mb-5" value={tab} onChange={setTab} items={['overview', 'hotspots', 'recurring', 'flagged', 'hype'].map(t => ({ key: t, label: t }))} />
 
       {tab === 'overview' && (
         <>
@@ -115,7 +108,7 @@ export default function AdminDashboard() {
                   <XAxis dataKey="date" tick={{ fontSize: 10 }} tickFormatter={d => d.slice(5)} />
                   <YAxis tick={{ fontSize: 10 }} />
                   <Tooltip />
-                  <Line type="monotone" dataKey="count" stroke="#ef4444" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="count" stroke="#337ab7" strokeWidth={2} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -143,7 +136,7 @@ export default function AdminDashboard() {
                   <XAxis dataKey="department" tick={{ fontSize: 10 }} />
                   <YAxis tick={{ fontSize: 10 }} />
                   <Tooltip />
-                  <Bar dataKey="avg_hours" fill="#f97316" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="avg_hours" fill="#337ab7" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -163,6 +156,18 @@ export default function AdminDashboard() {
                 ))}
               </div>
             </div>
+
+            <div className="card md:col-span-2">
+              <p className="text-sm font-semibold text-gray-700 mb-3">Reports by Service Group</p>
+              <ResponsiveContainer width="100%" height={Math.max(220, serviceGroupData.length * 24)}>
+                <BarChart data={serviceGroupData} layout="vertical" margin={{ left: 10, right: 20 }}>
+                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 10 }} />
+                  <YAxis type="category" dataKey="name" width={190} tick={{ fontSize: 10 }} />
+                  <Tooltip />
+                  <Bar dataKey="value" name="Reports" fill="#6a00c9" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </>
       )}
@@ -170,23 +175,13 @@ export default function AdminDashboard() {
       {tab === 'hotspots' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Top buildings table */}
-          <div className="card">
-            <p className="text-sm font-semibold text-gray-700 mb-3">Top 5 Hotspot Buildings</p>
-            <table className="w-full text-xs">
-              <thead><tr className="text-gray-400 border-b"><th className="text-left pb-2">Building</th><th className="text-right pb-2">Reports</th></tr></thead>
-              <tbody>
-                {data.top_buildings.map((b, i) => (
-                  <tr key={b.building} className="border-b border-gray-50">
-                    <td className="py-2 font-medium">{i + 1}. {b.building}</td>
-                    <td className="py-2 text-right text-red-600 font-bold">{b.count}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <DataTable title="Top 5 Hotspot Buildings" rows={data.top_buildings} rowKey="building" pageSize={5} columns={[
+            { label: 'Building', accessor: 'building', render: (b, index) => <span className="font-semibold">{b.building}</span> },
+            { label: 'Reports', accessor: 'count', render: b => <span className="font-bold text-primary">{b.count}</span> },
+          ]} />
 
           {/* Campus heat grid */}
-          <div className="card">
+          <div className="card min-w-0">
             <p className="text-sm font-semibold text-gray-700 mb-3">Campus Heat Grid</p>
             <div className="grid grid-cols-3 gap-2">
               {data.top_buildings.concat(
@@ -214,28 +209,11 @@ export default function AdminDashboard() {
       )}
 
       {tab === 'recurring' && (
-        <div className="card">
-          <p className="text-sm font-semibold text-gray-700 mb-3">Recurring Issues</p>
-          {data.recurring_issues.length === 0
-            ? <EmptyState icon="🔁" title="No recurring issues" />
-            : <table className="w-full text-xs">
-              <thead><tr className="text-gray-400 border-b">
-                <th className="text-left pb-2">Title</th>
-                <th className="text-left pb-2">Building</th>
-                <th className="text-right pb-2">Recurrences</th>
-              </tr></thead>
-              <tbody>
-                {data.recurring_issues.map(r => (
-                  <tr key={r.id} className="border-b border-gray-50 hover:bg-gray-50">
-                    <td className="py-2 font-medium">{r.title}</td>
-                    <td className="py-2 text-gray-500">{r.building}</td>
-                    <td className="py-2 text-right text-purple-600 font-bold">×{r.recurrence_count}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          }
-        </div>
+          <DataTable title="Recurring Issues" rows={data.recurring_issues} emptyMessage="No recurring issues" columns={[
+            { label: 'Title', accessor: 'title', render: r => <span className="font-semibold">{r.title}</span> },
+            { label: 'Building', accessor: 'building' },
+            { label: 'Recurrences', accessor: 'recurrence_count', render: r => <span className="font-bold text-table-purple">×{r.recurrence_count}</span> },
+          ]} />
       )}
 
       {tab === 'flagged' && (
@@ -250,7 +228,7 @@ export default function AdminDashboard() {
                     <p className="text-sm font-semibold text-gray-900">{r.title}</p>
                     <p className="text-xs text-gray-500">{r.building} · Awaiting reporter</p>
                   </div>
-                  <a href={`/reports/${r.id}`} className="text-xs text-red-600 hover:underline">View →</a>
+                  <a href={`/reports/${r.id}`} className="text-xs font-semibold text-primary hover:underline">View →</a>
                 </div>
               ))}
             </div>
@@ -265,7 +243,7 @@ export default function AdminDashboard() {
             {data.hype_leaderboard.map((h, i) => (
               <div key={h.building} className="flex items-center justify-between py-2 border-b border-gray-50">
                 <span className="text-sm">{i + 1}. {h.building}</span>
-                <span className="text-sm font-bold text-red-500">🔥 {h.total_hypes}</span>
+                <span className="text-sm font-bold text-primary">🔥 {h.total_hypes}</span>
               </div>
             ))}
           </div>
@@ -274,12 +252,13 @@ export default function AdminDashboard() {
             {allReports.sort((a, b) => b.hype_count - a.hype_count).slice(0, 8).map(r => (
               <div key={r.id} className="flex items-center justify-between py-2 border-b border-gray-50">
                 <span className="text-xs text-gray-700 truncate pr-2">{r.title}</span>
-                <span className="text-xs font-bold text-red-500 flex-shrink-0">🔥 {r.hype_count}</span>
+                <span className="text-xs font-bold text-primary flex-shrink-0">🔥 {r.hype_count}</span>
               </div>
             ))}
           </div>
         </div>
       )}
+      </PageCard>
     </div>
   )
 }

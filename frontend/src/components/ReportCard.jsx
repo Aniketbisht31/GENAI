@@ -49,7 +49,7 @@ export default function ReportCard({ report, onHypeChange }) {
 
   return (
     <Link to={`/reports/${report.id}`} className="block">
-      <div className="card hover:border-red-200 hover:shadow-md transition-all cursor-pointer">
+      <div className="card cursor-pointer transition-all hover:border-primary/40 hover:shadow-md">
         {/* Safety critical banner */}
         {report.is_safety_critical && (
           <div className="mb-2">
@@ -82,9 +82,13 @@ export default function ReportCard({ report, onHypeChange }) {
 
         {/* Badges row */}
         <div className="flex flex-wrap gap-1.5 mt-2.5">
-          <SeverityBadge severity={report.severity} />
+          {report.intent === 'service_request'
+            ? <span className="badge bg-blue-100 text-blue-800">Service request</span>
+            : <SeverityBadge severity={report.severity} />}
           <StatusBadge status={report.status} />
           <CategoryBadge category={report.category} />
+          {report.service_group && <span className="badge bg-violet-100 text-violet-800">{report.service_group}</span>}
+          {report.service_subcategory && <span className="badge bg-indigo-100 text-indigo-800">{report.service_subcategory}</span>}
           {report.recurrence_count > 0 && (
             <span className="badge bg-purple-100 text-purple-800">
               <RotateCcw size={10} className="mr-1" />
@@ -92,6 +96,8 @@ export default function ReportCard({ report, onHypeChange }) {
             </span>
           )}
         </div>
+
+        {report.prompt_version && <p className="text-[10px] text-gray-400 mt-1">Classifier {report.prompt_version}</p>}
 
         {/* Priority bar */}
         <div className="mt-2.5">
@@ -107,13 +113,16 @@ export default function ReportCard({ report, onHypeChange }) {
           {/* Hype button */}
           <button
             onClick={toggleHype}
+            type="button"
+            aria-label={`${hyped ? 'Remove hype from' : 'Hype'} ${report.title}`}
+            aria-pressed={Boolean(hyped)}
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all
               ${hyped
-                ? 'bg-red-100 text-red-600 hover:bg-red-200'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-primary-light text-primary-dark hover:bg-blue-100'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
           >
-            <Flame size={13} className={hyped ? 'fill-red-500' : ''} />
+            <Flame size={13} className={hyped ? 'fill-primary text-primary' : ''} />
             {hypeCount}
           </button>
         </div>

@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
-import Navbar from './components/Navbar'
+import AppLayout from './components/AppLayout'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import NewReportPage from './pages/NewReportPage'
@@ -9,15 +9,6 @@ import ReportDetailPage from './pages/ReportDetailPage'
 import MyReportsPage from './pages/MyReportsPage'
 import AuthorityDashboard from './pages/AuthorityDashboard'
 import AdminDashboard from './pages/AdminDashboard'
-
-function Layout({ children }) {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main>{children}</main>
-    </div>
-  )
-}
 
 export default function App() {
   return (
@@ -29,36 +20,36 @@ export default function App() {
         {/* Protected — all logged-in users */}
         <Route path="/" element={
           <ProtectedRoute>
-            <Layout><HomePage /></Layout>
+            <AppLayout><HomePage /></AppLayout>
           </ProtectedRoute>
         } />
         <Route path="/report/new" element={
           <ProtectedRoute>
-            <Layout><NewReportPage /></Layout>
+            <AppLayout><NewReportPage /></AppLayout>
           </ProtectedRoute>
         } />
         <Route path="/reports/:id" element={
           <ProtectedRoute>
-            <Layout><ReportDetailPage /></Layout>
+            <AppLayout><ReportDetailPage /></AppLayout>
           </ProtectedRoute>
         } />
         <Route path="/my-reports" element={
           <ProtectedRoute>
-            <Layout><MyReportsPage /></Layout>
+            <AppLayout><MyReportsPage /></AppLayout>
           </ProtectedRoute>
         } />
 
         {/* Authority only */}
         <Route path="/authority" element={
           <ProtectedRoute roles={['authority', 'admin']}>
-            <Layout><AuthorityDashboard /></Layout>
+            <AppLayout><AuthorityDashboard /></AppLayout>
           </ProtectedRoute>
         } />
 
         {/* Admin only */}
         <Route path="/admin" element={
           <ProtectedRoute roles={['admin']}>
-            <Layout><AdminDashboard /></Layout>
+            <AppLayout><AdminDashboard /></AppLayout>
           </ProtectedRoute>
         } />
 

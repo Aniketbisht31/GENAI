@@ -42,6 +42,7 @@ export const reportsAPI = {
   create: (formData) => api.post('/reports', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   }),
+  confirmClassification: (id, catalogId) => api.patch(`/reports/${id}/classification`, { catalog_id: catalogId }),
   updateStatus: (id, data) => api.patch(`/reports/${id}/status`, data),
   assign: (id, data) => api.patch(`/reports/${id}/assign`, data),
   hype: (id) => api.post(`/reports/${id}/hype`),

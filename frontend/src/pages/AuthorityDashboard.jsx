@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext'
 import { SeverityBadge, StatusBadge, CriticalBanner, Spinner, EmptyState } from '../components/UI'
 import toast from 'react-hot-toast'
 import { List, LayoutGrid, Upload, ChevronRight } from 'lucide-react'
+import PageCard from '../components/PageCard'
+import DataTable from '../components/DataTable'
 
 const KANBAN_COLS = [
   { status: 'assigned', label: 'Assigned', color: 'border-purple-400' },
@@ -53,17 +55,18 @@ export default function AuthorityDashboard() {
   }
 
   const handleResolve = async () => {
-    if (!selected || !afterImage || !resolveNote) {
-      toast.error('After photo and note are required')
+    const needsPhoto = selected?.intent !== 'service_request'
+    if (!selected || (needsPhoto && !afterImage) || !resolveNote) {
+      toast.error(needsPhoto ? 'After photo and note are required' : 'A note is required')
       return
     }
     setActionLoading(true)
     try {
       const fd = new FormData()
       fd.append('note', resolveNote)
-      fd.append('after_image', afterImage)
+      if (afterImage) fd.append('after_image', afterImage)
       const r = await reportsAPI.resolve(selected.id, fd)
-      toast.success('Resolution submitted! Awaiting reporter confirmation.')
+      toast.success(selected.intent === 'service_request' ? 'Service request marked complete.' : 'Resolution submitted! Awaiting reporter confirmation.')
       if (r.data.flagged_for_review) {
         toast('⚠️ Flagged for admin review — AI match confidence is low', { icon: '🔍' })
       }
@@ -84,21 +87,12 @@ export default function AuthorityDashboard() {
   if (loading) return <div className="flex justify-center py-16"><Spinner size="lg" /></div>
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-xl font-bold text-gray-900">Authority Queue</h1>
-          <p className="text-sm text-gray-500">{user?.department} Department · {reports.length} reports</p>
-        </div>
-        <div className="flex gap-2">
-          <button onClick={() => setView('kanban')} className={`p-2 rounded-lg border ${view === 'kanban' ? 'bg-red-50 border-red-200 text-red-600' : 'text-gray-500'}`}>
+    <div className="mx-auto max-w-7xl">
+      <PageCard title="Authority Queue" actions={<><span className="hidden text-xs text-blue-50 sm:inline">{user?.department} · {reports.length} reports</span><button type="button" aria-label="Kanban board view" aria-pressed={view === 'kanban'} onClick={() => setView('kanban')} className={`rounded-md border p-2 ${view === 'kanban' ? 'border-white bg-white text-primary' : 'border-white/50 text-white hover:bg-white/10'}`}>
             <LayoutGrid size={16} />
-          </button>
-          <button onClick={() => setView('list')} className={`p-2 rounded-lg border ${view === 'list' ? 'bg-red-50 border-red-200 text-red-600' : 'text-gray-500'}`}>
+          </button><button type="button" aria-label="List view" aria-pressed={view === 'list'} onClick={() => setView('list')} className={`rounded-md border p-2 ${view === 'list' ? 'border-white bg-white text-primary' : 'border-white/50 text-white hover:bg-white/10'}`}>
             <List size={16} />
-          </button>
-        </div>
-      </div>
+          </button></>}>
 
       {/* Safety critical pinned */}
       {criticalReports.length > 0 && (
@@ -119,7 +113,7 @@ export default function AuthorityDashboard() {
         </div>
       )}
 
-      <div className="flex gap-4">
+      <div className="flex min-w-0 flex-col gap-4 xl:flex-row">
         {/* Main view */}
         <div className="flex-1">
           {view === 'kanban' ? (
@@ -136,7 +130,7 @@ export default function AuthorityDashboard() {
                         <button
                           key={r.id}
                           onClick={() => { setSelected(r); setNewStatus('') }}
-                          className={`w-full text-left p-3 bg-white rounded-lg border transition-all ${selected?.id === r.id ? 'border-red-400 shadow-sm' : 'border-gray-200 hover:border-gray-300'}`}
+                          className={`w-full text-left p-3 bg-white rounded-lg border transition-all ${selected?.id === r.id ? 'border-primary shadow-sm' : 'border-gray-200 hover:border-primary/50'}`}
                         >
                           <div className="flex items-start gap-2">
                             {r.is_safety_critical && <span className="text-red-500 text-xs">🚨</span>}
@@ -144,7 +138,7 @@ export default function AuthorityDashboard() {
                               <p className="text-xs font-semibold text-gray-900 truncate">{r.title}</p>
                               <p className="text-xs text-gray-500 mt-0.5">{r.building}</p>
                               <div className="flex gap-1 mt-1">
-                                <SeverityBadge severity={r.severity} />
+                                {r.intent === 'service_request' ? <span className="badge bg-blue-100 text-blue-800">Service request</span> : <SeverityBadge severity={r.severity} />}
                               </div>
                             </div>
                           </div>
@@ -156,47 +150,26 @@ export default function AuthorityDashboard() {
               ))}
             </div>
           ) : (
-            <div className="space-y-2">
-              {reports.length === 0
-                ? <EmptyState icon="✅" title="No reports assigned" description="All clear in your department." />
-                : reports.map(r => (
-                  <button
-                    key={r.id}
-                    onClick={() => { setSelected(r); setNewStatus('') }}
-                    className={`w-full text-left p-3 bg-white rounded-xl border transition-all ${selected?.id === r.id ? 'border-red-400' : 'border-gray-200 hover:border-gray-300'}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {r.image_path && <img src={`http://localhost:8000/${r.image_path}`} alt="" className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          {r.is_safety_critical && <span className="text-red-500">🚨</span>}
-                          <p className="font-semibold text-sm text-gray-900 truncate">{r.title}</p>
-                        </div>
-                        <p className="text-xs text-gray-500">{r.building}{r.zone ? ` · ${r.zone}` : ''}</p>
-                        <div className="flex gap-1.5 mt-1">
-                          <SeverityBadge severity={r.severity} />
-                          <StatusBadge status={r.status} />
-                        </div>
-                      </div>
-                      <span className="text-xs font-bold text-gray-400">{Math.round(r.priority_score)}</span>
-                    </div>
-                  </button>
-                ))
-              }
-            </div>
+            <DataTable title="Assigned Reports" rows={reports} emptyMessage="No reports assigned. All clear in your department." columns={[
+              { label: 'Report', accessor: 'title', render: r => <button type="button" onClick={() => { setSelected(r); setNewStatus('') }} className="max-w-[22rem] truncate text-left font-semibold text-primary hover:underline">{r.is_safety_critical && <span className="mr-1 text-red-700" aria-label="Safety critical">🚨</span>}{r.title}</button> },
+              { label: 'Location', accessor: 'building', render: r => <span>{r.building}{r.zone ? ` · ${r.zone}` : ''}</span> },
+              { label: 'Priority', accessor: 'priority_score', render: r => <span className="font-bold">{Math.round(r.priority_score)}</span> },
+              { label: 'Status', accessor: 'status', render: r => <StatusBadge status={r.status} /> },
+              { label: 'Open', accessor: 'title', render: r => <button type="button" aria-label={`Open ${r.title}`} onClick={() => { setSelected(r); setNewStatus('') }} className="rounded border border-primary px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary-light">Select</button> },
+            ]} />
           )}
         </div>
 
         {/* Action panel */}
         {selected && (
-          <div className="w-72 flex-shrink-0">
+          <div className="w-full flex-shrink-0 xl:w-72">
             <div className="card sticky top-20 space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold text-sm text-gray-900 truncate pr-2">{selected.title}</h3>
-                <button onClick={() => setSelected(null)} className="text-gray-400 hover:text-gray-600 text-lg leading-none">×</button>
+              <button type="button" aria-label="Close report actions" onClick={() => setSelected(null)} className="rounded p-1 text-gray-500 hover:bg-slate-100 hover:text-gray-900 text-lg leading-none">×</button>
               </div>
 
-              <button onClick={() => navigate(`/reports/${selected.id}`)} className="text-xs text-red-600 hover:underline">
+              <button onClick={() => navigate(`/reports/${selected.id}`)} className="text-xs font-semibold text-primary hover:underline">
                 View full report →
               </button>
 
@@ -221,8 +194,12 @@ export default function AuthorityDashboard() {
               {/* Resolve with after photo */}
               <div className="border-t pt-3">
                 <p className="text-xs font-semibold text-gray-700 mb-2">Mark as Resolved</p>
-                <label className="block text-xs font-medium text-gray-600 mb-1">After photo *</label>
-                <input type="file" accept="image/*" onChange={e => setAfterImage(e.target.files[0])} className="text-xs w-full" />
+                {selected.intent !== 'service_request' && (
+                  <>
+                    <label className="block text-xs font-medium text-gray-600 mb-1">After photo *</label>
+                    <input type="file" accept="image/*" onChange={e => setAfterImage(e.target.files[0])} className="text-xs w-full" />
+                  </>
+                )}
                 {afterImage && <p className="text-xs text-green-600 mt-0.5">✓ {afterImage.name}</p>}
                 <textarea
                   className="input text-xs resize-none mt-2"
@@ -240,6 +217,7 @@ export default function AuthorityDashboard() {
           </div>
         )}
       </div>
+      </PageCard>
     </div>
   )
 }

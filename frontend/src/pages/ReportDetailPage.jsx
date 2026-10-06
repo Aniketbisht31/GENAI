@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext'
 import { SeverityBadge, StatusBadge, CategoryBadge, Spinner, CriticalBanner } from '../components/UI'
 import toast from 'react-hot-toast'
 import { MapPin, Clock, Flame, CheckCircle, XCircle, RotateCcw, BarChart3 } from 'lucide-react'
+import PageCard from '../components/PageCard'
+import Tabs from '../components/Tabs'
 
 const STATUS_STEPS = ['reported', 'assigned', 'in_progress', 'pending_confirmation', 'resolved']
 
@@ -78,16 +80,15 @@ export default function ReportDetailPage() {
   const stepIndex = STATUS_STEPS.indexOf(report.status)
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
+    <div className="mx-auto max-w-4xl space-y-4">
       {/* Back */}
-      <button onClick={() => navigate(-1)} className="text-sm text-gray-500 hover:text-red-600">← Back</button>
+      <button onClick={() => navigate(-1)} className="rounded text-sm font-semibold text-slate-600 hover:text-primary">← Back</button>
 
       {/* Critical banner */}
       {report.is_safety_critical && <CriticalBanner />}
 
       {/* Header */}
-      <div className="card">
-        <h1 className="text-xl font-bold text-gray-900">{report.title}</h1>
+      <PageCard title={report.title}>
         <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
           <MapPin size={12} />
           <span>{report.building}{report.zone ? ` · ${report.zone}` : ''}</span>
@@ -99,9 +100,14 @@ export default function ReportDetailPage() {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-3">
-          <SeverityBadge severity={report.severity} />
+          {report.intent === 'service_request'
+            ? <span className="badge bg-blue-100 text-blue-800">Service request</span>
+            : <SeverityBadge severity={report.severity} />}
           <StatusBadge status={report.status} />
           <CategoryBadge category={report.category} />
+          {report.service_group && <span className="badge bg-violet-100 text-violet-800">{report.service_group}</span>}
+          {report.service_subcategory && <span className="badge bg-indigo-100 text-indigo-800">{report.service_subcategory}</span>}
+          {report.prompt_version && <span className="badge bg-gray-100 text-gray-600">Prompt {report.prompt_version}</span>}
           {report.recurrence_count > 0 && (
             <span className="badge bg-purple-100 text-purple-800">
               <RotateCcw size={10} className="mr-1" />×{report.recurrence_count} recurring
@@ -113,43 +119,34 @@ export default function ReportDetailPage() {
         <div className="flex items-center gap-4 mt-4 pt-3 border-t">
           <button
             onClick={toggleHype}
+            type="button"
+            aria-label={`${hyped ? 'Remove hype from' : 'Hype'} this report`}
+            aria-pressed={Boolean(hyped)}
             disabled={hypeLoading || report.reporter_id === user?.id}
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all disabled:opacity-50 ${
-              hyped ? 'bg-red-100 text-red-600 hover:bg-red-200' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              hyped ? 'bg-primary-light text-primary-dark hover:bg-blue-100' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            <Flame size={16} className={hyped ? 'fill-red-500' : ''} />
+            <Flame size={16} className={hyped ? 'fill-primary text-primary' : ''} />
             Hype · {hypeCount}
           </button>
           <span className="text-xs text-gray-400">
             Priority score: <strong className="text-gray-700">{Math.round(report.priority_score)}</strong>
           </span>
         </div>
-      </div>
+      </PageCard>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 p-1 rounded-xl">
-        {[
+      <Tabs items={[
           { key: 'details', label: 'Details' },
           { key: 'timeline', label: 'Timeline' },
           { key: 'ai', label: 'AI Analysis' },
           { key: 'priority', label: 'Priority' },
-        ].map(t => (
-          <button
-            key={t.key}
-            onClick={() => setActiveTab(t.key)}
-            className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              activeTab === t.key ? 'bg-white shadow text-gray-900' : 'text-gray-500'
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+        ]} value={activeTab} onChange={setActiveTab} />
 
       {/* Tab content */}
       {activeTab === 'details' && (
-        <div className="card space-y-4">
+        <PageCard title="Report Details"><div className="space-y-4">
           {report.image_path && (
             <img
               src={`http://localhost:8000/${report.image_path}`}
@@ -166,6 +163,7 @@ export default function ReportDetailPage() {
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div><span className="text-gray-400">Department:</span> <span className="font-medium">{report.assigned_department || '—'}</span></div>
             <div><span className="text-gray-400">Hazard type:</span> <span className="font-medium">{report.hazard_type?.replace(/_/g, ' ') || '—'}</span></div>
+            {report.sla_hours && <div><span className="text-gray-400">Response SLA:</span> <span className="font-medium">{report.sla_hours}h</span></div>}
           </div>
 
           {/* Before/after photos */}
@@ -212,22 +210,22 @@ export default function ReportDetailPage() {
               </div>
             </div>
           )}
-        </div>
+        </div></PageCard>
       )}
 
       {activeTab === 'timeline' && (
-        <div className="card">
+        <PageCard title="Status Timeline"><div>
           {/* Status progress bar */}
           <div className="flex items-center mb-6">
             {STATUS_STEPS.map((s, i) => (
               <div key={s} className="flex items-center flex-1">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
-                  i <= stepIndex ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-400'
+                  i <= stepIndex ? 'bg-primary text-white' : 'bg-gray-200 text-gray-600'
                 }`}>
                   {i < stepIndex ? '✓' : i + 1}
                 </div>
                 {i < STATUS_STEPS.length - 1 && (
-                  <div className={`flex-1 h-0.5 mx-1 ${i < stepIndex ? 'bg-red-600' : 'bg-gray-200'}`} />
+                  <div className={`flex-1 h-0.5 mx-1 ${i < stepIndex ? 'bg-primary' : 'bg-gray-200'}`} />
                 )}
               </div>
             ))}
@@ -241,7 +239,7 @@ export default function ReportDetailPage() {
             {report.status_history?.map((log, i) => (
               <div key={log.id} className="flex gap-3">
                 <div className="flex flex-col items-center">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mt-1 flex-shrink-0" />
+                  <div className="w-2 h-2 bg-primary rounded-full mt-1 flex-shrink-0" />
                   {i < report.status_history.length - 1 && <div className="w-0.5 flex-1 bg-gray-200 mt-1" />}
                 </div>
                 <div className="pb-4">
@@ -254,11 +252,11 @@ export default function ReportDetailPage() {
               </div>
             ))}
           </div>
-        </div>
+        </div></PageCard>
       )}
 
       {activeTab === 'ai' && (
-        <div className="card space-y-3">
+        <PageCard title="AI Analysis"><div className="space-y-3">
           <h3 className="font-semibold text-sm text-gray-800">AI Transparency</h3>
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div className="bg-gray-50 rounded-lg p-3">
@@ -268,6 +266,18 @@ export default function ReportDetailPage() {
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="text-xs text-gray-400">Confidence</p>
               <p className="font-semibold mt-0.5">{report.ai_confidence ? `${Math.round(report.ai_confidence * 100)}%` : '—'}</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="text-xs text-gray-400">Intent confidence</p>
+              <p className="font-semibold mt-0.5">{report.intent_confidence != null ? `${Math.round(report.intent_confidence * 100)}%` : '—'}</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="text-xs text-gray-400">Group confidence</p>
+              <p className="font-semibold mt-0.5">{report.group_confidence != null ? `${Math.round(report.group_confidence * 100)}%` : '—'}</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="text-xs text-gray-400">Subcategory confidence</p>
+              <p className="font-semibold mt-0.5">{report.subcategory_confidence != null ? `${Math.round(report.subcategory_confidence * 100)}%` : '—'}</p>
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="text-xs text-gray-400">Category</p>
@@ -282,15 +292,15 @@ export default function ReportDetailPage() {
             <p className="text-xs text-gray-400 mb-1">AI Reasoning</p>
             <p className="text-sm text-gray-700">{report.ai_reasoning || 'No AI reasoning available'}</p>
           </div>
-        </div>
+        </div></PageCard>
       )}
 
       {activeTab === 'priority' && report.priority_breakdown && (
-        <div className="card space-y-3">
+        <PageCard title="Priority Score Breakdown"><div className="space-y-3">
           <div className="flex items-center gap-2">
-            <BarChart3 size={18} className="text-red-500" />
+            <BarChart3 size={18} className="text-primary" />
             <h3 className="font-semibold text-sm text-gray-800">Priority Score Breakdown</h3>
-            <span className="ml-auto text-2xl font-bold text-red-600">{Math.round(report.priority_breakdown.final_score)}</span>
+            <span className="ml-auto text-2xl font-bold text-primary">{Math.round(report.priority_breakdown.final_score)}</span>
           </div>
 
           {[
@@ -305,7 +315,7 @@ export default function ReportDetailPage() {
                 <span>{Math.round(value * weight * 100)} pts</span>
               </div>
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                <div className="h-full bg-red-400 rounded-full" style={{ width: `${value * 100}%` }} />
+                <div className="h-full bg-primary rounded-full" style={{ width: `${value * 100}%` }} />
               </div>
             </div>
           ))}
@@ -316,7 +326,7 @@ export default function ReportDetailPage() {
           {report.priority_breakdown.safety_critical_override && (
             <p className="text-xs text-red-600 font-semibold">🚨 Safety-critical override applied (score forced to ≥90)</p>
           )}
-        </div>
+        </div></PageCard>
       )}
     </div>
   )
